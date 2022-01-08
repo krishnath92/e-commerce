@@ -144,7 +144,7 @@ require('../src/connect.php');
 		<!-- PRESENTATION -->
 		<section id = "presentation">
             <div class="present">
-			    <h3 style="padding-bottom: 40px; padding-top: 40px;">Bienvenue</h3> 
+			    <h3 style="padding-bottom: 40px;">Bienvenue</h3> 
 
 			    <!--Description -->
 			    <p> <strong>Livraison gratuite pour les membres à partir de 20 € d'achat. </strong> |  
