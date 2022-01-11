@@ -161,7 +161,7 @@ require('../src/connect.php');
                 <div id="projets">
                     <!-- Nouveauté -->
                     <div style="margin-bottom: 40px;" class="img-accueil">
-                        <a href="#" title="Voir le premier projet" >
+                        <a href="" title="Voir le premier projet" >
                             <div class="picture-accueil">
                                 <img src="../img/new-collection-d-hiver.jpg" alt="mon premier projet"/>
                             </div>
@@ -170,7 +170,7 @@ require('../src/connect.php');
                     </div>
                     <!-- Promotion -->
                     <div style="margin-bottom: 40px;" class="img-accueil">
-                        <a href="#" title="Voir le premier projet" >
+                        <a href="accueilCommun.php?remise=1" title="Voir le premier projet" >
                             <div class="picture-accueil">
                                 <img src="../img/promo.jpg" alt="mon premier projet"/>
                             </div>

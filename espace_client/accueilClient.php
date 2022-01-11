@@ -195,7 +195,7 @@ if(!isset($_SESSION["user"])){
                     <!-- Promotion -->
                     <div style="margin-bottom: 40px;" class="img-accueil">
 
-                        <a href="#" title="Voir le premier projet" >
+                        <a href="accueilClient.php?remise=1" title="Voir le premier projet" >
                             <div class="picture-accueil">
                                 <img src="../img/promo.jpg" alt="mon premier projet"/>
                             </div>
