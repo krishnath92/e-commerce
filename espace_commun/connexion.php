@@ -104,7 +104,7 @@ if(!empty($_POST['email']) && !empty($_POST['password'])){
 <body>
 
 <div id="brand" >
-	<a href="accueilCommun.php" ><img style="height: 55px" src="../img/logo.png" alt=""></a>
+	<a href="accueilCommun.php?accueil=1" ><img style="height: 55px" src="../img/logo.png" alt=""></a>
 </div>
 
 	<section>
