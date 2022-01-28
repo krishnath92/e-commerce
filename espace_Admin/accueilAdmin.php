@@ -67,16 +67,7 @@ require('../src/connect.php');
                 if(isset($_GET['success']))
                     echo'<div class="alert success">Vous êtes maintenant connecté en tant qu\'administrateur du site web.</div>';
                 ?>
-            <!-- image déroulante -->
-            <div id = "caroussel">
-                <div class="images">
-                    <img src="../img/sport_header.jpg">
-                    <img src="../img/Nike_header.jpg">
-                    <img src="../img/adidas_header.jpg">
-                    <img src="../img/northFace_header.jpg">
-                </div>
-            </div>
-
+    
             <!--button id="deco" onclick="window.location.href='accueil.php';">compte administrateur</button-->
             
     </header>
