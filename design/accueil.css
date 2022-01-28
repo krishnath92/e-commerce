@@ -62,10 +62,6 @@ h3{
     font-size: 18px;
     border-style: solid;
     border-color: #4fc0a6;
-    border-left: none;
-    border-right: none;
-    border-top: none;
-    background-color:#4fc0a6;
     border-radius: 2em;
 }
 
@@ -279,6 +275,10 @@ h3{
     font-size: 1.2rem;
 }
 
+.glow-on-hover-connexion:hover {
+    color : #4fc0a6;
+    font-size: 1.5rem;
+  }
 
 @keyframes glowing {
     0% { background-position: 0 0; }
