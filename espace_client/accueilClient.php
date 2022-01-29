@@ -37,7 +37,7 @@ if(!isset($_SESSION["user"])){
         <a href="accueilClient.php?accueil=1" ><img src="../img/logo.png" alt="LOGO" /></a>
         <h1 class= "h1 text-client" >Bienvenue sur Stunning Outfit Shop !</h1> <br>   
             <li class="dropdown">
-                <a class="bi bi-person-circle" style="font-size: 2rem; color: white;"><?php echo $_SESSION['prenom']; ?></a>
+                <a class="bi bi-person-circle" style="font-size: 2rem; color: black;"><?php echo $_SESSION['prenom']; ?></a>
 
                 <div class="dropdown-content">          
                     <a style='color:white;' href="../espace_client/logout.php">Se déconnecter</a>
@@ -81,7 +81,7 @@ if(!isset($_SESSION["user"])){
             </ul>
         </nav>
         <?php
-            echo'<div class="alert success">Vous êtes maintenant connecté.</div>';
+            echo'<div class="alert success">Bonjour '.$_SESSION['prenom'].' !</div>';
         ?>
     
             

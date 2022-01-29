@@ -123,15 +123,15 @@ require('../src/connect.php');
     <?php
     if(isset($_GET['accueil'])){ ?>
 
-    <h3 style="text-align:center; padding-top:40px" >Quelle action souhaitez-vous réaliser ?</h3>
+    <h3 style="text-align:center; padding-top:100px" >Quelle action souhaitez-vous réaliser ?</h3>
     <!--a href="membres.php">afficher tous les membres</a><br-->
-    <button style="margin:40px 400px;"  onclick="window.location.href='membres.php';">Afficher tous les membres</button>
+    <button class = "boutonAdmin" style="margin:40px 700px;"  onclick="window.location.href='membres.php';">Afficher tous les membres</button>
 
     <!--a href="publier_Article.php">Publier un article</a><br-->
-    <button style="margin:40px 400px;" onclick="window.location.href='publier_Article.php';">Mettre en vente un article</button>
+    <button class = "boutonAdmin" style="margin:40px 700px;" onclick="window.location.href='publier_Article.php';">Mettre en vente un article</button>
     
     <!--a href="articles.php">afficher tous les article</a><br-->
-    <button style="margin:40px 400px;" onclick="window.location.href='articles.php';">Afficher tous les article</button>
+    <button class = "boutonAdmin" style="margin:40px 700px;" onclick="window.location.href='articles.php';">Afficher tous les article</button>
     <?php } ?>
 
     <div class="contener">
