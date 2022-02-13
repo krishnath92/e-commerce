@@ -60,7 +60,7 @@ function connexion()
                     setcookie('auth', $user['secret'], time() + 364*24*3600, '/', null, false, true);
                 }
 
-                header('location: ../espace_client/accueilClient.php?accueil=1');
+                header('location: ../espace_commun/accueilCommun.php?accueil=1');
                 exit();
 
             }

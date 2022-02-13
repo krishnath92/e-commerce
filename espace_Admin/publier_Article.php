@@ -175,7 +175,7 @@ if(isset($_POST['ok'])){
             </table>
         </fieldset>
     </form><br>
-    <button class = "accueil-publierArticle" style="margin-left: 35%;"onclick="window.location.href='accueilAdmin.php?accueil=1';">Revenir à l'accueil</button>
+    <button class = "accueil-publierArticle" style="margin-left: 35%;"onclick="window.location.href='../espace_commun/accueilCommun.php?accueil=1';">Revenir à l'accueil</button>
     <button class = "ListeArticle-button" style="margin-left:50px;"onclick="window.location.href='articles.php';" title='Voir tous les articles'>Tous les articles</button>
     
     <script src="script.js"></script>

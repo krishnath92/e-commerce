@@ -3,7 +3,7 @@ function logoAdmin(){
 	echo"<link rel='stylesheet' href='stylesheet.css' />
 		<div style='width: 100%; height: 10px; background-color: #000000;'>
 		    <div id='brand'>
-		       	<a href= 'accueilAdmin.php?accueil=1' ><img src='../img/logo.png' alt='LOGO' title='Accueil' /></a>
+		       	<a href= '../espace_commun/accueilCommun.php?accueil=1' ><img src='../img/logo.png' alt='LOGO' title='Accueil' /></a>
 		    </div>
 	   	</div>
 	    ";
@@ -12,7 +12,7 @@ function logoVisualisation(){
 	echo"<link rel='stylesheet' href='stylesheet.css' />
 		<div style='width: 100%; height: 10px; background-color: #000000;'>
 		    <div id='brand'>
-		       	<a href= '../accueilAdmin.php?accueil=1' ><img src='../../img/logo.png' alt='LOGO' /></a>
+		       	<a href= '../espace_commun/accueilCommun.php?accueil=1' ><img src='../../img/logo.png' alt='LOGO' /></a>
 		    </div>
 	   	</div>
 	    ";
@@ -25,7 +25,7 @@ function initMenuAdmin(){
 		<div style='width: 100%; height: 57px; background-color: #000000;'>
 			<div id='navigation'>
 				<ul>
-					<li><a href='accueilAdmin.php?accueil=1'>Accueil</a></li>
+					<li><a href='../espace_commun/accueilCommun.php?accueil=1'>Accueil</a></li>
 
 					<li><a href='Visualisation/marque.php'>Marque</a></li>
 		
@@ -51,7 +51,7 @@ function initMenu2Admin(){
 		<div style='width: 100%; height: 57px; background-color: #000000;'>
 			<div id='navigation'>
 				<ul>
-					<li><a href='accueilAdmin.php?accueil=1'>Accueil</a></li>
+					<li><a href='../espace_commun/accueilCommun.php?accueil=1'>Accueil</a></li>
 
 					<li><a href='Visualisation/marque.php'>Marque</a></li>
 		
@@ -76,7 +76,7 @@ function initBoutonAdmin(){
 		<div style='width: 100%; height: 57px; background-color: #000000; margin-bottom:20px;'>
 			<div id='navigation'>
 				<ul>
-					<li><a href='../accueilAdmin.php?accueil=1'>Accueil</a></li>
+					<li><a href='../espace_commun/accueilCommun.php?accueil=1'>Accueil</a></li>
 
 					<li><a href='marque.php'>Marque</a></li>
 		

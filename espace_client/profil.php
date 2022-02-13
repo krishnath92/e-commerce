@@ -165,7 +165,7 @@ if(isset($_SESSION['user'])) {
 
 <header>
       	<div id="brand">
-         	<a href= "accueilClient.php?accueil=1" ><img src="../img/logo.png" alt="LOGO" /></a>
+         	<a href= "../espace_commun/accueilCommun.php?accueil=1" ><img src="../img/logo.png" alt="LOGO" /></a>
       	</div>
    	</header>
 	
@@ -184,7 +184,7 @@ if(isset($_SESSION['user'])) {
 
             } else if(isset($_GET['success'])) {
 
-            echo'<div class="alert success">Vous avez modifié votre profil. <a href="accueilClient.php?accueil=1"><b>Revenir à l\'accueil</b></a>.</div>';
+            echo'<div class="alert success">Vous avez modifié votre profil. <a href="../espace_commun/accueilCommun.php?accueil=1"><b>Revenir à l\'accueil</b></a>.</div>';
 
             } ?>
 				
@@ -298,7 +298,7 @@ if(isset($_SESSION['user'])) {
 				<button type="submit" name = "ok" class>Modifier son profil</button>
 			</form>		    
 
-			<button style="width: 40%; margin-top: 30px; padding: 5px; font-size: 0.85em" onclick="window.location.href='accueilClient.php';">Revenir à l'accueil</button>
+			<button style="width: 40%; margin-top: 30px; padding: 5px; font-size: 0.85em" onclick="window.location.href='../espace_commun/accueilCommun.php';">Revenir à l'accueil</button>
 
 
 					

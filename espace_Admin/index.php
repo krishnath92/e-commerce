@@ -36,7 +36,8 @@ if(isset($_POST['valider'])){
 
 		if($mail_saisi == $mail_ParDefaut AND $mdp_saisi == $mdp_ParDefaut){
 			$_SESSION['mdp'] = $mdp_saisi;
-			header('location: accueilAdmin.php?accueil=1&success=1');
+			$_SESSION['admin'] = "admin";
+			header('location: ../espace_commun/accueilCommun.php?accueil=1&success=1');
 		}else{
 			header("location: index.php?error=1&message=Votre-mot-de-passe-ou-nom-est-incorrect");
 		}

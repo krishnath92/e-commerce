@@ -116,7 +116,7 @@ if(!$_SESSION['mdp']){
     <br>
     <div id="button-listearticle"> 
         <button class="publie-article-button" onclick="window.location.href='publier_Article.php';">Ajouter un article</button>
-        <button class="accueil-article" onclick="window.location.href='accueilAdmin.php?accueil=1';">Revenir à l'accueil</button>
+        <button class="accueil-article" onclick="window.location.href='../espace_commun/accueilCommun.php?accueil=1';">Revenir à l'accueil</button>
     </div>
 
 </body>

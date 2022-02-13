@@ -12,7 +12,7 @@
 </body>
 </html>
 <br>
-<button style="margin-left: 20%;" onclick="window.location.href='../accueilAdmin.php?accueil=1';" title="Retourner à l'accueil">Accueil</button>  
+<button style="margin-left: 20%;" onclick="window.location.href='../espace_commun/accueilCommun.php?accueil=1';" title="Retourner à l'accueil">Accueil</button>  
 <button style="margin-left: 40px; margin-bottom:10px"onclick="window.location.href='../articles.php';" title='Voir tous les articles'>Tous les articles</button>
 <button style="margin-left: 40px; margin-bottom:10px"onclick="window.location.href='categorie.php';" title='Voir les articles Hommes et Femmes'>Les articles Hommes ou Femmes</button>
 <button style="margin-left: 40px; margin-bottom:10px"onclick="window.location.href='marque.php';" title='Voir les articles selon leur marque'>Marque</button>

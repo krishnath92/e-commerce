@@ -148,7 +148,7 @@
 				<label id="option"><input type="checkbox" name="auto" checked />Se souvenir de moi</label><br/>
 			</form>		
 
-			<button style="width: 40%; padding: 5px; font-size: 0.85em" onclick="window.location.href='index.php';">Revenir à l'accueil</button>
+			<button style="width: 40%; padding: 5px; font-size: 0.85em" onclick="window.location.href='../espace_commun/accueilCommun.php';">Revenir à l'accueil</button>
 
 					
 		</div>

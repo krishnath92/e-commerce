@@ -10,7 +10,7 @@ if(isset($_SESSION['connect'])){
 	}
 	alert("Pas besoin de s'inscrire, vous êtes déjà connecté");
 	
-	header('location: accueilClient.php');
+	header('location: accueilCommun.php');
 
 	exit();
 }
@@ -22,7 +22,7 @@ if(isset($_POST["ok"])){
 	if(!empty($email) && !empty($password) && !empty($password_two) 
 		&& !empty($prenom) && !empty($nom) && !empty($birthDate)
 		&& !empty($adresse1) && !empty($adresseLivraison) && !empty($pays) && !empty($ville)  
-		&& !empty($codePostal) && !empty($numero) && !empty($civilite)){
+		&& !empty($codePostal) && !empty($numero) && !empty($civilite) && !empty($captcha)){
 
 		require('../src/connect.php');
 
@@ -30,6 +30,12 @@ if(isset($_POST["ok"])){
 		$email 				= htmlspecialchars($email);
 		$password 			= htmlspecialchars($password);
 		$password_two		= htmlspecialchars($password_two);
+
+		// Captcha valide
+		if ($_POST['captcha'] != $_SESSION['captcha']){
+			header('location: inscription.php?error=1&message=Votre captcha est faux.');
+			exit();
+		}
 
 		// PASSWORD = PASSWORD TWO
 		if($password != $password_two){
@@ -262,6 +268,12 @@ if(isset($_POST["ok"])){
 				<!--Confirmation mot de passe-->
 				<input type="password" name="password_two" id = "pwd2" placeholder="Retapez votre mot de passe" required />
 				<input type="checkbox" onclick = "Afficher2()"> Afficher <br/><br/>
+
+				<!--Captcha-->
+				<div class="input">
+					<img src="captcha.php" width="60" height="50"/>
+					<input name="captcha" type="text" id="captcha" placeholder="Rentrez le nombre" required>	
+            	</div>
 
 				<button type="submit" name = "ok" class>S'inscrire</button>
 			</form>

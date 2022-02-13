@@ -216,7 +216,7 @@ if (isset($_GET['homme'])||isset($_GET['femme'])){
         echo "
             <div class='projet'>"?>
                 <!--a href='#' title='Voir le premier projet' -->
-                <a href = '../article_v2/article.php?reference=<?= $article['reference']; ?>' 
+                <a href = '../espace_commun/article.php?reference=<?= $article['reference']; ?>' 
                     style='color:black; text-decoration: none;'>
                     <?="<div class='picture'>";
                     if ($sexe == "homme"){

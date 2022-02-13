@@ -287,7 +287,7 @@ if(isset($_GET['reference']) AND !empty($_GET['reference'])){
     </form>
     <br>
     <button onclick="window.location.href='articles.php';">Retour sur la liste des articles</button>
-    <button style="margin-left:10px;" onclick="window.location.href='accueilAdmin.php?accueil=1';">Revenir à l'accueil</button>
+    <button style="margin-left:10px;" onclick="window.location.href='../espace_commun/accueilCommun.php?accueil=1';">Revenir à l'accueil</button>
 
     <script src="script.js"></script>
 </body>

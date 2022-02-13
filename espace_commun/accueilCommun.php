@@ -1,5 +1,6 @@
 
 <?php
+session_start();
 require('../src/connect.php');
 //$articles = $db->query('SELECT * FROM articles ORDER BY date_time_publication DESC');
 
@@ -28,12 +29,33 @@ require('../src/connect.php');
     <header>
         <div id="brand">
             <a  href="accueilCommun.php?accueil=1" ><img src="../img/logo.png" alt="LOGO" /></a>
-            <h1 class= "h1 text-gradiant" >Bienvenue sur Stunning Outfit Shop !</h1>
+            <?php if(!isset($_SESSION["admin"])){ ?> <h1 class= "h1 text-presentation" >Bienvenue sur Stunning Outfit Shop !</h1> <?php } ?>
+            <?php if(isset($_SESSION["admin"])){ ?> <h1 class= "h1 text-presentation-admin" >Bienvenue sur  l'espace admin  de Stunning Outfit Shop !</h1> <?php } ?>
             <div class="search-container">
                 <input type="text" placeholder="Search.." name="search">
                 <button class="bi bi-search"  type="submit"></button>
             </div>
+        <?php if(isset($_SESSION["user"])){ ?>
+            <li class="dropdown">
+                <a class="bi bi-person-circle" style="font-size: 2rem; color: black;"><?php echo $_SESSION['prenom']; ?></a>
+
+                <div class="dropdown-content">          
+                    <a style='color:white;' href="../espace_client/logout.php">Se déconnecter</a>
+                    <a style='color:white;' href="../espace_client/profil.php">Consulter son profil</a>
+                    <a style='color:white;' href="../espace_client/logout.php">Consulter ses commandes</a>
+                
+                </div>
+            </li>
+            <button class="glow-on-hover" onclick="window.location.href='../espace_client/panier.php';">Mon panier</button>
+            <?php } ?>
+
+            <?php if(isset($_SESSION["admin"])){ ?>
+                <button class="glow-on-hover-connexion" onclick="window.location.href='../espace_admin/logout.php';">Se déconnecter</button>
+            <?php } ?>
+            
+            <?php if(!isset($_SESSION["user"])&&!isset($_SESSION["admin"])){ ?>
             <button class="glow-on-hover-connexion" onclick="window.location.href='connexion.php';">Se connecter </button>  
+            <?php } ?>
         </div>
         <!-- MENU CENTRALE-->
         <nav >
@@ -68,20 +90,10 @@ require('../src/connect.php');
             </ul>
         </nav>
 
-            
-            <!-- image déroulante -->
-      
-            <!--button id="panier" onclick="window.location.href='../espace_client/panier.php?action=ajout&amp';"n=NOMPRODUIT&amp;q=QUANTITEPRODUIT&amp;p=PRIXPRODUIT" 
-                onclick="window.open(this.href, '', 'toolbar=no, location=no, directories=no, \
-                'status=yes, scrollbars=yes, resizable=yes, copyhistory=no, width=600, height=350');
-                return false;">Mon panier
-            </button-->
-            <?php
-                if(isset($_GET['success'])){ ?>
-                    <button onclick="window.location.href='../espace_client/checkout/index.php';">Mon panier</button>
-            <?php } 
-                else { ?>    
-            <?php }?> 
+        <?php
+        if(isset($_GET['success'])&&isset($_SESSION["admin"]))
+            echo'<div class="alert success">Vous êtes maintenant connecté en tant qu\'administrateur du site web.</div>';
+        ?>
     </header>
 
     <!-- MENU RECHERCHE-->
@@ -132,7 +144,7 @@ require('../src/connect.php');
 
     <div class="contener">
     <?php
-        if(isset($_GET['accueil'])&& $_GET['accueil'] == 1){ ?>
+        if(isset($_GET['accueil'])&& $_GET['accueil'] == 1 && !isset($_SESSION["admin"]) ){ ?>
            
 		<!-- PRESENTATION -->
 		<section id = "presentation">
@@ -173,6 +185,20 @@ require('../src/connect.php');
                 </div>
             </div>
 		</section>
+        <?php } ?>
+
+        <?php
+    if(isset($_GET['accueil'])&&isset($_SESSION["admin"])){ ?>
+
+        <h3 style="text-align:center;" >Quelle action souhaitez-vous réaliser ?</h3>
+        <!--a href="membres.php">afficher tous les membres</a><br-->
+        <button class = "boutonAdmin" style="margin:40px ;"  onclick="window.location.href='../espace_Admin/membres.php';">Afficher tous les membres</button>
+
+        <!--a href="publier_Article.php">Publier un article</a><br-->
+        <button class = "boutonAdmin" style="margin:40px ;" onclick="window.location.href='../espace_Admin/publier_Article.php';">Mettre en vente un article</button>
+        
+        <!--a href="articles.php">afficher tous les article</a><br-->
+        <button class = "boutonAdmin" style="margin:40px ;" onclick="window.location.href='../espace_Admin/articles.php';">Afficher tous les article</button>
         <?php } ?>
 
         <!-- Les Vêtements -->
