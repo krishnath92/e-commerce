@@ -27,7 +27,7 @@ if(!$_SESSION['mdp']){
     <?php 
         logoAdmin();
         //Mise en place du menu
-        initMenuAdminMembres();
+        //initMenuAdminMembres();
         
     ?>
     
@@ -52,13 +52,7 @@ if(!$_SESSION['mdp']){
             <th>Civilité</th>
             <th>Nom</th>
             <th>Prénom</th>
-            <th>Télephone</th>
             <th>Adresse mail</th>
-            <th>Date de naissance</th>
-            <th>Pays</th>
-            <th>Ville</th>
-            <th>Code postal</th>
-            <th>Adresse</th>
             <th>Adresse de livraison</th>
             <th>Bannir ?</th>
         </tr>";
@@ -68,13 +62,7 @@ if(!$_SESSION['mdp']){
         echo  "<td>". $user['civilité']. "</td>";
         echo "<td>". $user['nom']. "</td>";
         echo "<td>". $user['prenom']. "</td>";
-        echo "<td>". $user['Tél']. "</td>";
         echo "<td>". $user['email']. "</td>";
-        echo "<td>". $user['date_naissance']. "</td>";
-        echo "<td>". $user['pays']. "</td>";
-        echo "<td>". $user['ville']. "</td>";
-        echo "<td>". $user['code_postal']. "</td>";
-        echo "<td>". $user['adresse']. "</td>";
         echo "<td>". $user['adresse_livraison']. "</td>";
         echo"<td>"?> 
         <a href = "bannir.php?email=<?= $user['email']; ?>" style="color:red; text-decoration: none;"> Bannir le membre</a>
