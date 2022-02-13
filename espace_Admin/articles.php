@@ -21,25 +21,47 @@ if(!$_SESSION['mdp']){
     <link rel="icon" type="image/png" href="../img/favicon.png">
     <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="../design/accueil.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
 
     <title>Afficher les articles</title>
 </head>
 <body>
     <?php
-    //Afficher tous les articles
-        $res = $db->query('SELECT count(*) from products');
-        $recupArticle = $db->query('SELECT * from products order by nombre_stock asc');
 
-        $nbrArticle = $res->fetchColumn();
         logoAdmin();
         //Mise en place du menu
-        initMenuAdmin();?>
+        //initMenuAdmin();?>
+        <h1 style='font-size:48px; text-align:center;'>Les articles</h1>
+        <form method='get' action=''>
+            <div class="search-container">
+                    <input type="text" placeholder="Search.." name="search">
+                    <button class="bi bi-search"  type="submit" name ="ok"></button>
+            </div><hr/>
+        </form>
         <!-- Bouton ALLER EN BAS DE PAGE -->
         <button style="margin-left:95%;"> 
             <img style ="width:40px;" src="../img/to_down.png" onclick="window.scrollTo(0,document.body.scrollHeight);" title="Aller en bas de page"/> 
         </button> 
 
         <?php
+
+        if (!isset($_GET['search'])){
+            //Afficher tous les articles
+            $res = $db->query('SELECT count(*) from products');
+            $recupArticle = $db->query('SELECT * from products order by nombre_stock asc');
+
+            $nbrArticle = $res->fetchColumn();
+        }
+
+        if (isset($_GET['search'])){
+            $carac = $_GET['search'];
+            $res = $db->query("SELECT count(*) from products where couleur = '$carac' or marque = '$carac' or reference = '$carac' or description = '$carac' or categorie = '$carac' or sous_categorie = '$carac'");
+            $nbrArticle = $res->fetchColumn();
+            $recupArticle = $db->prepare('SELECT * from products where couleur = ? or marque = ? or reference = ? or description = ? or categorie = ? or sous_categorie = ?');
+            $recupArticle->execute(array($carac,$carac,$carac,$carac,$carac,$carac));
+            
+        }
+
         ////    AFFICHAGE DU TABLEAU TRIE PAR LA QUANTITE EN ORDRE CROISSANT ///
         echo"<table class='table-products' border = '3' cellspacing ='1'>
             <tr> <!--h1> Les articles </h1--> 

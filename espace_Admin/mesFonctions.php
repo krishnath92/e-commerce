@@ -24,8 +24,8 @@ function initMenuAdmin(){
 		<link rel='stylesheet' href='stylesheet.css' />
 		<div style='width: 100%; height: 57px; background-color: #000000;'>
 			<div id='navigation'>
-				<ul>
-					<li><a href='../espace_commun/accueilCommun.php?accueil=1'>Accueil</a></li>
+				<ul>li><a href='../espace_commun/accueilCommun.php?accueil=1'>Accueil</a></li>
+					<
 
 					<li><a href='Visualisation/marque.php'>Marque</a></li>
 		
