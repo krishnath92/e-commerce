@@ -2,6 +2,61 @@
 session_start();
 require('../src/connect.php');
 
+if(isset($_SESSION["user"])){ 
+    if(isset($_POST["add_to_cart"]))
+    {
+    if(isset($_SESSION["shopping_cart"]))
+        {
+            $item_array_id = array_column($_SESSION["shopping_cart"], "item_ref");
+            if(!in_array($_GET["reference"], $item_array_id))
+                {
+                $count = count($_SESSION["shopping_cart"]);
+                $item_array = array(
+                    'item_ref'     =>  $_GET["reference"],
+                    'item_couleur'     =>  $_POST["hidden_color"],
+                    'item_prix'    =>  $_POST["hidden_price"],
+                    'item_quantite'   =>  $_POST["quantity"],
+                    'item_dispo'   =>  $_POST["hidden_dispo"]
+                );
+                $_SESSION["shopping_cart"][$count] = $item_array;
+                }
+            else
+                {
+                echo '<script>alert("Item Already Added")</script>';
+                }
+        }
+    else
+    {
+        $item_array = array(
+        'item_ref'     =>  $_GET["reference"],
+        'item_couleur'     =>  $_POST["hidden_color"],
+        'item_prix'    =>  $_POST["hidden_price"],
+        'item_quantite'   =>  $_POST["quantity"],
+        'item_dispo'   =>  $_POST["hidden_dispo"]
+        );
+        $_SESSION["shopping_cart"][0] = $item_array;
+    }
+    }
+
+    if(isset($_GET["action"]))
+    {
+        if($_GET["action"] == "delete")
+        {
+            foreach($_SESSION["shopping_cart"] as $keys => $values)
+            {
+                if($values["item_ref"] == $_GET["reference"])
+                {
+                    unset($_SESSION["shopping_cart"][$keys]);
+                    echo '<script>alert("Item Removed")</script>';
+                    header("Location:article.php");
+                }
+            }
+        }
+    }
+}
+
+
+
 if(isset($_GET['reference']) AND !empty($_GET['reference'])){
     $getRef= $_GET['reference'];
     
@@ -144,26 +199,23 @@ if(isset($_GET['reference']) AND !empty($_GET['reference'])){
                     <?php }?> 
             </header>
 
-        <div class="content-article">      
+        <div class="content-article">       
+        <form method="POST" action="article.php?reference=<?= $_GET['reference']; ?>"
             <div class="slideDiv">
                 <div class="slider">
-
                     <?php echo "<img src='../img/".$categorie_Vêtement."/".$image_Vêtement."' alt =''/>"?>
                             
                     <div class='texte'>
-                        <h4><b>REFERENCE</b>: <?= $getRef?> </h4>
+
+                    <h4><b>REFERENCE</b>: <?= $getRef;?> </h4> <input type="hidden" name="hidden_ref" value="<?= $getRef;?>" />
+                    <h4><b>PRIX</b>: <?= $prixTTC_Vêtement?> </h4> <input type="hidden" name="hidden_price" value="<?= $prixTTC_Vêtement?>" />
+                    <h4><b>COULEUR</b>: <?=$couleur_Vêtement?> </h4> <input type="hidden" name="hidden_color" value="<?=$couleur_Vêtement?>" />
+                    <h4><b>TAILLE</b>: <input class='box' list='Taille' name='Taille' placeholder='M'></h4>
+                    <h4><b>QUANTITE</b>: <input value=1 name="quantity" min='0' max='9999' type='number' class='quantite'></h4>
+                    <h4><b>DISPONIBILITE</b>: <?= $nbr_Vêtement?> </h4> <input type="hidden" name="hidden_dispo" value="<?= $nbr_Vêtement?>" />
+
+       
                         <br>
-                        <h4><b>PRIX</b>: <?= $prixTTC_Vêtement?>€ </h4>
-                        <br>
-                        <h4><b>COULEUR</b>: <?=$couleur_Vêtement?></h4>
-                        <br>
-                        <h4><b>TAILLE</b>: <input class='box' list='Taille' name='Tailles' placeholder='M'></h4>
-                        <br>
-                        <h4><b>QUANTITE</b>: <input value=1 min='0' max='9999' type='number' class='quantite'></h4>
-                        <br>
-                        <h4><b>DISPONIBILITE</b>: <?= $nbr_Vêtement?></h4>
-                        <br>
-                        <a href='#' class='ajout-panier'>AJOUTER AU PANIER</a>
                         <br>
                         <br>
                         <datalist  id='Taille'>
@@ -173,8 +225,15 @@ if(isset($_GET['reference']) AND !empty($_GET['reference'])){
                             <option value='L'>
                             <option value='XL'>
                         </datalist>
+                        <?php if(isset($_SESSION["user"])) {?>
+                            <button type="submit" name="add_to_cart" style="margin-top:5px;" class="btn btn-success" value="Add to Cart">Ajouter au panier</button>
+                            <?php }?>
+                        <?php if(!isset($_SESSION["user"])) { ?>
+                            <button class="btn btn-success" type="submit" formaction='../espace_commun/connexion.php'>Connectez-vous</button>
+                            <?php }?>
                     </div>
                 </div>
+                </form>
                 <!--
                 <div class="sliderRight"><i class="fa-solid fa-angle-right"></i></div>
                 <div class="sliderLeft"><i class="fa-solid fa-angle-left"></i></div>

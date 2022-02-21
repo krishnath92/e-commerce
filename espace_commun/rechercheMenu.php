@@ -213,6 +213,7 @@ if (isset($_GET['homme'])||isset($_GET['femme'])){
         $prixinitial = $article['priceTTC'];
         $prixremise = $article['priceTTC']*($article['remise']/100);
         $prixTTC = $article['priceTTC'] - $prixremise ;
+        $_SESSION['article'] = $article['reference'];
         echo "
             <div class='projet'>"?>
                 <!--a href='#' title='Voir le premier projet' -->

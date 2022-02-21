@@ -1,145 +1,199 @@
-<?php
-session_start();
-require_once("mesFonctions.php");
-require("../src/connect.php");
+<?php 
+  // Database
+ include('../src/connect.php');
+ require_once("mesFonctions.php");
+  
+  // Set session
+  session_start();
+  if(isset($_POST['records-limit'])){
+      $_SESSION['records-limit'] = $_POST['records-limit'];
+  }
+  
+  $limit = isset($_SESSION['records-limit']) ? $_SESSION['records-limit'] : 5;
+  $page = (isset($_GET['page']) && is_numeric($_GET['page']) ) ? $_GET['page'] : 1;
+  $paginationStart = ($page - 1) * $limit;
+  //$articles = $db->query("SELECT * FROM products order by nombre_stock asc LIMIT $paginationStart, $limit")->fetchAll();
+  
 
-if(!$_SESSION['mdp']){
-    header('location: accueilCommun.php');
-}
 ?>
-
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <!-- Bootstrap CSS -->
-     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <link rel="stylesheet" href="style/miniDesign.css" >
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="icon" type="image/png" href="img/favicon.png">
+    <link rel="stylesheet" href="style/miniDesign">
     <link rel="stylesheet" href="style/stylesheet.css" >
-    <link rel="icon" type="image/png" href="../img/favicon.png">
+
     <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="../design/accueil.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
 
-    <title>Afficher les articles</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <title>ARTICLE</title>
+    <style>
+        .container {
+            max-width: 1000px
+        }
+        .custom-select {
+            max-width: 1500px
+        }
+    </style>
 </head>
 <body>
-    <?php
-
-        logoAdmin();
-        //Mise en place du menu
-        //initMenuAdmin();?>
-        <h1 style='font-size:48px; text-align:center;'>Les articles</h1>
+<?php logoAdmin(); ?>
+    
+    
+    <div class=" mt-5">
+        <h1 class="text-center mb-5">Les articles</h1>
+        <!-- Search form -->
+        <!--input class="form-control w-25 mx-auto" type="text" placeholder="Search" name="search" aria-label="Search"-->   
         <form method='get' action=''>
             <div class="search-container">
-                    <input type="text" placeholder="Search.." name="search">
-                    <button class="bi bi-search"  type="submit" name ="ok"></button>
+                <input type="text" placeholder="Search.." name="search">
+                <button class="bi bi-search"  type="submit" name ="ok"></button>
             </div><hr/>
         </form>
-        <!-- Bouton ALLER EN BAS DE PAGE -->
-        <button style="margin-left:95%;"> 
-            <img style ="width:40px;" src="../img/to_down.png" onclick="window.scrollTo(0,document.body.scrollHeight);" title="Aller en bas de page"/> 
-        </button> 
 
-        <?php
-
+    <?php
+        /////////////   ALGORITHME DE RECHERCHE /////////////
         if (!isset($_GET['search'])){
+            // Get total records
+            $sql = $db->query("SELECT count(id) AS id FROM products")->fetchAll();
+            $allRecrods = $sql[0]['id'];
+            
+            // Calculate total pages
+            $totoalPages = ceil($allRecrods / $limit);
+            // Prev + Next
+            $prev = $page - 1;
+            $next = $page + 1;
+
             //Afficher tous les articles
             $res = $db->query('SELECT count(*) from products');
-            $recupArticle = $db->query('SELECT * from products order by nombre_stock asc');
+            //$recupArticle = $db->query('SELECT * from products order by nombre_stock asc');
+            $recupArticle = $db->query("SELECT * FROM products order by nombre_stock desc LIMIT $paginationStart, $limit")->fetchAll();
 
             $nbrArticle = $res->fetchColumn();
         }
 
-        if (isset($_GET['search'])){
+        if (isset($_GET['search'])){ 
+            
+
             $carac = $_GET['search'];
             $res = $db->query("SELECT count(*) from products where couleur = '$carac' or marque = '$carac' or reference = '$carac' or description = '$carac' or categorie = '$carac' or sous_categorie = '$carac'");
-            $nbrArticle = $res->fetchColumn();
-            $recupArticle = $db->prepare('SELECT * from products where couleur = ? or marque = ? or reference = ? or description = ? or categorie = ? or sous_categorie = ?');
-            $recupArticle->execute(array($carac,$carac,$carac,$carac,$carac,$carac));
+            $nbrArticle = $res->fetchColumn();         
+
+            $recupArticle = $db->prepare("SELECT * from products 
+                                        where couleur = ? or marque = ? or reference = ? or description = ? or categorie = ? or sous_categorie = ? 
+                                        LIMIT $paginationStart, $limit");
+            $recupArticle->execute(array($carac,$carac,$carac,$carac,$carac,$carac));        
             
-        }
-
-        ////    AFFICHAGE DU TABLEAU TRIE PAR LA QUANTITE EN ORDRE CROISSANT ///
-        echo"<table class='table-products' border = '3' cellspacing ='1'>
-            <tr> <!--h1> Les articles </h1--> 
-                <div style='text-align:center; margin-bottom:5px;'>
-                    <b>Il y a " .  $nbrArticle . " articles trouvés.</b>
-                </div>
-
-                <th>ID</th>
-                <th>"?> 
-                <a id = "titre" href = "Visualisation/marque.php" > Marque</a>
-                    <?= "</th>
-                <th>"?> 
-                <a id = "titre"href = "Visualisation/categorie.php" > Catégorie</a>
-                    <?= "</th>
-                <th>"?> 
-                <a id = "titre"href = "Visualisation/sousCat.php" > Sous - catégorie</a>
-                    <?= "</th>
-                <th style='text-align: center;'>Photo</th>
-                <th>Description</th>
-                <th>"?> 
-                <a id = "titre"href = "Visualisation/couleur.php" > Couleur</a>
-                    <?= "</th>
-                <th>Tailles disponibles</th>
-                <th>Prix d'achat HT</th>
-                <th>Prix de vente HT</th>
-                <th>TVA</th>
-                <th>Prix TTC</th>
-                <th>Poids (en g)</th>
-                <th style='text-align: center;'>Référence</th>
-                <th>"?>  
-                <a id = "titre"href = "Visualisation/stock.php" > Quantité</a>
-                    <?= "</th>
-                <th>Remise</th>
-                <th>Supprimer ?</th>
-                <th>Modifier ?</th>
-            </tr>";
-        while($article = $recupArticle->fetch()){
-               echo"<tr>";
-                echo "<td>" .$article['id']. "</td>";
-                echo  "<td>". $article['marque']. "</td>";
-                echo  "<td>". $article['categorie']. "</td>";
-                echo  "<td>". $article['sous_categorie']. "</td>";
-                echo  "<td>". $article['image']. "</td>";
-                echo  "<td>". $article['description']. "</td>";
-                echo  "<td>". $article['couleur']. "</td>";
-                echo  "<td>". $article['taille']. "</td>";
-                echo  "<td>". $article['prix_achat_HT']. "</td>";
-                echo  "<td>". $article['prix_vente_HT']. "</td>";
-                echo  "<td>". $article['tauxTVA']. "</td>";
-                echo  "<td>". $article['priceTTC']. "</td>";
-                echo  "<td>". $article['poids']. "</td>";
-                echo "<td>". $article['reference']. "</td>";
-                echo "<td>". $article['nombre_stock']. "</td>";
-                echo "<td>". $article['remise']. "</td>";
-                echo"<td>"?> 
-                <a href = "supprimer_Article.php?reference=<?= $article['reference']; ?>" style="color:red; text-decoration: none;"> Supprimer l'article</a>
-                    <?= "</td>";
-                echo"<td>"?> 
-                <a href = "modifier_Article.php?reference=<?= $article['reference']; ?>" style="color:red; text-decoration: none;"> Modifier l'article</a>
-                    <?= "</td>";
-                echo"</tr>";
+            // Get total records
+            $sql = $db->query("SELECT count(id) AS id FROM products")->fetchAll();
+            $allRecrods = $sql[0]['id'];
+            // Calculate total pages
+            $totoalPages = ceil($allRecrods / $limit);
+            // Prev + Next
+            $prev = $page - 1;
+            $next = $page + 1;
             
-           
-        }
-        echo "</table>";
-    
-   ?>
-
-   <!-- Bouton RETOUR EN HAUT DE PAGE -->
-   <div id="scroll_to_top">
-        <a href="#top"><img style ="width:40px;" src="../img/to_top.png" title="Retourner en haut" /></a>
+            
+        } ?>
+        
     </div>
-    
-    <br>
-    <div id="button-listearticle"> 
-        <button class="publie-article-button" onclick="window.location.href='publier_Article.php';">Ajouter un article</button>
-        <button class="accueil-article" onclick="window.location.href='../espace_commun/accueilCommun.php?accueil=1';">Revenir à l'accueil</button>
+        <!-- Select dropdown -->
+        <div class="d-flex flex-row-reverse bd-highlight mb-3 mr-5">
+            <form action="articles.php" method="post">
+                <select name="records-limit" id="records-limit" class="custom-select">
+                    <option disabled selected>Limite de lignes</option>
+                    <?php foreach([5,7,10,12] as $limit) : ?>
+                    <option
+                        <?php if(isset($_SESSION['records-limit']) && $_SESSION['records-limit'] == $limit) echo 'selected'; ?>
+                        value="<?= $limit; ?>">
+                        <?= $limit; ?>
+                    </option>
+                    <?php endforeach; ?>
+                </select>
+            </form>
+        </div>
+        <!-- Datatable -->
+        <div class="table-responsive  mx-auto w-75 mb-5">
+            <table class="table table-bordered table-hover">
+                <caption><?= "<b>Il y a " . $nbrArticle . " articles trouvés.</b>"?></caption>
+                <thead>
+                    <tr class="table-success">
+                        <th scope="col">#</th>
+                        <th scope="col">Marque</th>
+                        <th scope="col">Catégorie</th>
+                        <th scope="col">Sous-categorie</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Couleur</th>
+                        <th scope="col">Tailles disponibles</th>
+                        <th scope="col">Couleur</th>
+                        <th scope="col">Prix d'achat HT</th>
+                        <th scope="col">Prix de vente HT</th>
+                        <th scope="col">Prix TTC</th>
+                        <th scope="col">Poids</th>
+                        <th scope="col">Référence</th>
+                        <th scope="col">Quantité</th>
+                        <th scope="col">Remise</th>
+                        <th scope="col">Supprimer ?</th>
+                        <th scope="col">Modifier ?</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach($recupArticle as $article){ ?>
+                    <tr>
+                        <th scope="row"><?= $article['id']; ?></th>
+                        <td><?= $article['marque']; ?></td>
+                        <td><?= $article['categorie']; ?></td>
+                        <td><?= $article['sous_categorie']; ?></td>
+                        <td><?= $article['description']; ?></td>
+                        <td><?= $article['couleur']; ?></td>
+                        <td><?= $article['taille']; ?></td>
+                        <td><?= $article['couleur']; ?></td>
+                        <td><?= $article['prix_achat_HT']; ?></td>
+                        <td><?= $article['prix_vente_HT']; ?></td>
+                        <td><?= $article['priceTTC']; ?></td>
+                        <td><?= $article['poids']; ?></td>
+                        <td><?= $article['reference']; ?></td>
+                        <td><?= $article['nombre_stock']; ?></td>
+                        <td><?= $article['remise']; ?></td>
+                        <td><a href = "supprimer_Article.php?reference=<?= $article['reference']; ?>" style="color:red; text-decoration: none;"> Supprimer l'article</a></td>
+                        <td><a href = "modifier_Article.php?reference=<?= $article['reference']; ?>" style="color:red; text-decoration: none;"> Modifier l'article</a></td>
+                    </tr>
+                    <?php } ?>
+                </tbody>
+            </table>
+        </div>
+        <!-- Pagination -->
+        <nav aria-label="Page navigation example mt-5">
+            <ul class="pagination justify-content-center">
+                <li class="page-item <?php if($page <= 1){ echo 'disabled'; } ?>">
+                    <a class="page-link"
+                        href="<?php if($page <= 1){ echo '#'; } else { echo "?page=" . $prev; } ?>">Previous</a>
+                </li>
+                <?php for($i = 1; $i <= $totoalPages; $i++ ): ?>
+                <li class="page-item <?php if($page == $i) {echo 'active'; } ?>">
+                    <a class="page-link" href="articles.php?page=<?= $i; ?>"> <?= $i; ?> </a>
+                </li>
+                <?php endfor; ?>
+                <li class="page-item <?php if($page >= $totoalPages) { echo 'disabled'; } ?>">
+                    <a class="page-link"
+                        href="<?php if($page >= $totoalPages){ echo '#'; } else {echo "?page=". $next; } ?>">Next</a>
+                </li>
+            </ul>
+        </nav>
     </div>
-
+    <!-- jQuery + Bootstrap JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#records-limit').change(function () {
+                $('form').submit();
+            })
+        });
+    </script>
 </body>
 </html>

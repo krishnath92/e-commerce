@@ -1,100 +1,170 @@
-<?php
-session_start();
-require_once("mesFonctions.php");
-require("../src/connect.php");
-if(!$_SESSION['mdp']){
-    header('location: index.php');
-}
-?>
+<?php 
+  // Database
+ include('../src/connect.php');
+ require_once("mesFonctions.php");
+  
+  // Set session
+  session_start();
+  if(isset($_POST['records-limit'])){
+      $_SESSION['records-limit'] = $_POST['records-limit'];
+  }
+  
+  $limit = isset($_SESSION['records-limit']) ? $_SESSION['records-limit'] : 5;
+  $page = (isset($_GET['page']) && is_numeric($_GET['page']) ) ? $_GET['page'] : 1;
+  $paginationStart = ($page - 1) * $limit;
+  // Get total records
+  $sql = $db->query("SELECT count(id) AS id FROM membres")->fetchAll();
+  $allRecrods = $sql[0]['id'];
+  
+  // Calculate total pages
+  $totoalPages = ceil($allRecrods / $limit);
+  // Prev + Next
+  $prev = $page - 1;
+  $next = $page + 1;
 
-<!DOCTYPE html>
+?>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="icon" type="image/png" href="img/favicon.png">
+    <link rel="stylesheet" href="style/miniDesign">
     <link rel="stylesheet" href="style/stylesheet.css" >
-    <link rel="icon" type="image/png" href="../img/favicon.png">
+
     <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="../design/accueil.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
-    
 
-    
-    <title>Afficher les membres</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <title>membre</title>
+    <style>
+        .container {
+            max-width: 1000px
+        }
+        .custom-select {
+            max-width: 1500px
+        }
+    </style>
 </head>
 <body>
-    <?php logoAdmin(); ?>
-    <h1 style='font-size:48px; text-align:center;'>Les membres</h1>
+<?php logoAdmin(); ?>
+    
+    
+    <div class=" mt-5">
+        <h1 class="text-center mb-5">Les clients inscrits</h1>
+        <!-- Search form -->
+        <!--input class="form-control w-25 mx-auto" type="text" placeholder="Search" name="search" aria-label="Search"-->   
         <form method='get' action=''>
             <div class="search-container">
-                    <input type="text" placeholder="Search.." name="search">
-                    <button class="bi bi-search"  type="submit" name ="ok"></button>
+                <input type="text" placeholder="Search.." name="search">
+                <button class="bi bi-search"  type="submit" name ="ok"></button>
             </div><hr/>
         </form>
-    
-    <!--Afficher tous les membres-->
+
     <?php
+        /////////////   ALGORITHME DE RECHERCHE /////////////
+        if (!isset($_GET['search'])){
+            //Afficher tous les users
+            $res = $db->query('SELECT count(*) from membres');
+            //$recupUsers = $db->query('SELECT * from membres order by nombre_stock asc');
+            $recupUsers = $db->query("SELECT * FROM membres LIMIT $paginationStart, $limit")->fetchAll();
 
-    
-    if (!isset($_GET['search'])){
-        //Afficher tous les articles
-        $res = $db->query('SELECT count(*) from membres');
-        $recupUsers = $db->query('SELECT * from membres');
+            $nbrClients = $res->fetchColumn();
+        }
 
-        $nbrClients = $res->fetchColumn();
-    }
+        if (isset($_GET['search'])){ 
+            $carac = $_GET['search'];
+            $res = $db->query("SELECT count(*) from membres where civilité = '$carac' or prenom = '$carac' or nom = '$carac' or email = '$carac' or adresse_livraison = '$carac' or pays='$carac' or ville='$carac'");
+            $nbrClients = $res->fetchColumn();       
 
-    if (isset($_GET['search'])){
-        $carac = $_GET['search'];
-        $res = $db->query("SELECT count(*) from membres where civilité = '$carac' or prenom = '$carac' or nom = '$carac' or email = '$carac' or adresse_livraison = '$carac'");
-        $nbrClients = $res->fetchColumn();
-        $recupUsers = $db->prepare('SELECT * from membres where civilité = ? or prenom = ? or nom = ? or email = ? or adresse_livraison = ?');
-        $recupUsers->execute(array($carac,$carac,$carac,$carac,$carac));
-        
-    }
-
-    echo"<table class = 'table-membre' border = '3' cellpadding='4' cellspacing ='1'>
-                <tr> 
-            <div style='text-align:center; margin-bottom:5px;'>
-                <b>Il y a " .  $nbrClients . " clients inscrits.</b>
-            </div>" ?>
-            <!-- Bouton ALLER EN BAS DE PAGE -->
-            <button style="margin-left:95%; margin-bottom:15px;"> 
-                    <img style ="width:40px;" src="../img/to_down.png" onclick="window.scrollTo(0,document.body.scrollHeight);" title="Aller en bas de page"/> 
-                </button>                
+            $recupUsers = $db->prepare("SELECT * from membres 
+                                        where civilité = ? or prenom = ? or nom = ? or email = ? or adresse_livraison = ? or pays=? or ville=?
+                                        LIMIT $paginationStart, $limit");
+            $recupUsers->execute(array($carac,$carac,$carac, $carac,$carac,$carac, $carac));        
             
-            <?= "<th>ID</th>
-            <th>Civilité</th>
-            <th>Nom</th>
-            <th>Prénom</th>
-            <th>Adresse mail</th>
-            <th>Adresse de livraison</th>
-            <th>Bannir ?</th>
-        </tr>";
-    while($user = $recupUsers->fetch()){
-        echo"<tr>";
-        echo "<td>" .$user['id']. "</td>";
-        echo  "<td>". $user['civilité']. "</td>";
-        echo "<td>". $user['nom']. "</td>";
-        echo "<td>". $user['prenom']. "</td>";
-        echo "<td>". $user['email']. "</td>";
-        echo "<td>". $user['adresse_livraison']. "</td>";
-        echo"<td>"?> 
-        <a href = "bannir.php?email=<?= $user['email']; ?>" style="color:red; text-decoration: none;"> Bannir le membre</a>
-            <?= "</td>";
-        echo"</tr>";
-    }
-    echo "</table>";
-    ?>
- 
-    
-    <br>
-    <div id="button-listemembre"> 
-        <!--button class="publie-article-button" onclick="window.location.href='publier_Article.php';">Ajouter un article</button-->
-        <button class="accueil-membre" onclick="window.location.href='../espace_commun/accueilCommun.php?accueil=1';">Revenir à l'accueil</button>
+           
+            
+        } ?>
+        
     </div>
+        <!-- Select dropdown -->
+        <div class="d-flex flex-row-reverse bd-highlight mb-3 mr-5">
+            <form action="membres.php" method="post">
+                <select name="records-limit" id="records-limit" class="custom-select">
+                    <option disabled selected>Limite de lignes</option>
+                    <?php foreach([5,7,10,12] as $limit) : ?>
+                    <option
+                        <?php if(isset($_SESSION['records-limit']) && $_SESSION['records-limit'] == $limit) echo 'selected'; ?>
+                        value="<?= $limit; ?>">
+                        <?= $limit; ?>
+                    </option>
+                    <?php endforeach; ?>
+                </select>
+            </form>
+        </div>
+        <!-- Datatable -->
+        <div class="table-responsive  mx-auto w-75 mb-5">
+            <table class="table table-bordered table-hover">
+                <caption><?= "<b>Il y a " . $nbrClients . " clients trouvés.</b>"?></caption>
+                <thead>
+                <tr class="table-success">
+                        <th scope="col">#</th>
+                        <th scope="col">Civilité</th>
+                        <th scope="col">Prenom</th>
+                        <th scope="col">Nom</th>
+                        <th scope="col">Adresse mail</th>
+                        <th scope="col">Pays</th>
+                        <th scope="col">Adresse de livraison</th>
+                        <th scope="col">Ville</th>    
+                        <th scope="col">Bannir ?</th>                                
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach($recupUsers as $user){ ?>
+                    <tr>
+                        <th scope="row"><?php echo $user['id_client']; ?></th>
+                        <td><?php echo $user['civilité']; ?></td>
+                        <td><?php echo $user['prenom']; ?></td>
+                        <td><?php echo $user['nom']; ?></td>
+                        <td><?php echo $user['email']; ?></td>
+                        <td><?php echo $user['pays']; ?></td>
+                        <td><?php echo $user['adresse_livraison']; ?></td>
+                        <td><?php echo $user['ville']; ?></td>
+                        <td><a href = "bannir.php?email=<?= $user['email']; ?>" style="color:red; text-decoration: none;"> Bannir le membre</a></td>
+                    </tr>
+                    <?php } ?>
+                </tbody>
+            </table>
+        </div>
+        <!-- Pagination -->
+        <nav aria-label="Page navigation example mt-5">
+            <ul class="pagination justify-content-center ">
+                <li class="page-item <?php if($page <= 1){ echo 'disabled'; } ?>">
+                    <a class="page-link"
+                        href="<?php if($page <= 1){ echo '#'; } else { echo "?page=" . $prev; } ?>">Previous</a>
+                </li>
+                <?php for($i = 1; $i <= $totoalPages; $i++ ): ?>
+                <li class="page-item <?php if($page == $i) {echo 'active'; } ?>">
+                    <a class="page-link" href="membres.php?page=<?= $i; ?>"> <?= $i; ?> </a>
+                </li>
+                <?php endfor; ?>
+                <li class="page-item <?php if($page >= $totoalPages) { echo 'disabled'; } ?>">
+                    <a class="page-link"
+                        href="<?php if($page >= $totoalPages){ echo '#'; } else {echo "?page=". $next; } ?>">Next</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+    <!-- jQuery + Bootstrap JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#records-limit').change(function () {
+                $('form').submit();
+            })
+        });
+    </script>
 </body>
 </html>

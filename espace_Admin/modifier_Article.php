@@ -112,7 +112,7 @@ if(isset($_GET['reference']) AND !empty($_GET['reference'])){
                 $updateImage->execute(array($nom_Image, $getRef));
             }
            
-            header('location: articles.php?Article-modifié-avec-succès');
+            header('location: articles2.php?Article-modifié-avec-succès');
             
         }
         
