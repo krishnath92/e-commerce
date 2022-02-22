@@ -199,6 +199,8 @@ if (isset($_GET['homme'])||isset($_GET['femme'])){
             }
         }
     }
+    
+
 
     if (isset($sous_categorie)){
         echo " <h3 id='searchcategorie' style='padding-bottom: 40px; padding-top: 40px;'>Vetement / ".$sexe." / ".$sous_categorie." (".$nbrsouscategorie.")</h3>";
@@ -242,3 +244,55 @@ if (isset($_GET['homme'])||isset($_GET['femme'])){
     }
     echo "</div>";       
 }
+
+if (isset($_GET['search'])){ 
+            
+    echo " <h3 id='searchcategorie' style='padding-bottom: 40px; padding-top: 40px;'>Vetement / ".$_GET['search']." </h3>";
+    $carac = $_GET['search'];
+    $res = $db->query("SELECT count(*) from products where couleur = '$carac' or marque = '$carac' or reference = '$carac' or description = '$carac' or categorie = '$carac' or sous_categorie = '$carac'");
+    $nbrArticle = $res->fetchColumn();         
+
+    $recupArticle = $db->prepare("SELECT * from products 
+                                where couleur = ? or marque = ? or reference = ? or description = ? or categorie = ? or sous_categorie = ? 
+                             ");
+    $recupArticle->execute(array($carac,$carac,$carac,$carac,$carac,$carac));    
+
+    echo " <div id='projets'>";
+    foreach($recupArticle as $article){ 
+
+        $prixinitial = $article['priceTTC'];
+        $prixremise = $article['priceTTC']*($article['remise']/100);
+        $prixTTC = $article['priceTTC'] - $prixremise ;
+        $_SESSION['article'] = $article['reference'];
+
+         echo "
+            <div class='projet'>"?>
+                <!--a href='#' title='Voir le premier projet' -->
+                <a href = '../espace_commun/article.php?reference=<?= $article['reference']; ?>' 
+                    style='color:black; text-decoration: none;'>
+                    <?="<div class='picture'>";
+                    if ($article['categorie'] == "Homme"){
+                       
+                        echo "<img src='../img/homme/".$article['image']."' alt =''/>";
+                    }
+
+                    if ($article['categorie'] == "Femme"){
+                        echo "<img src='../img/femme/".$article['image']."' alt =''/>";
+                    }
+    echo             "</div>
+                    <span class='reference'style='color:black;'>".$article['reference']." </span>"?>
+
+                    <?php if($article['remise'] >0 ){
+                        echo"  <span class='prix'style='color:black;'> <strike>". $prixinitial." €</strike> ".$article['remise']."% </span> 
+                        <span class='prix'style='color:green;'>". $prixTTC." €</span>";
+                    }else{
+                        echo"<span class='prix'style='color:black;'>". $prixTTC." €</span>";
+                    }?> <?="
+                </a>
+                </div>";
+
+    }
+    echo "</div>";       
+}
+
+
