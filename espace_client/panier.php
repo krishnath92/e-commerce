@@ -4,40 +4,6 @@ session_start();
 require('../src/connect.php');
 
 if(isset($_SESSION["user"])){ 
-    if(isset($_POST["add_to_cart"]))
-    {
-    if(isset($_SESSION["shopping_cart"]))
-        {
-            $item_array_id = array_column($_SESSION["shopping_cart"], "item_ref");
-            if(!in_array($_GET["reference"], $item_array_id))
-                {
-                $count = count($_SESSION["shopping_cart"]);
-                $item_array = array(
-                    'item_ref'     =>  $_GET["reference"],
-                    'item_couleur'     =>  $_POST["hidden_color"],
-                    'item_prix'    =>  $_POST["hidden_price"],
-                    'item_quantite'   =>  $_POST["quantity"],
-					'item_dispo'   =>  $_POST["hidden_dispo"]
-                );
-                $_SESSION["shopping_cart"][$count] = $item_array;
-                }
-            else
-                {
-                echo '<script>alert("Item Already Added")</script>';
-                }
-        }
-    else
-    {
-        $item_array = array(
-        'item_ref'     =>  $_GET["reference"],
-        'item_couleur'     =>  $_POST["hidden_color"],
-        'item_prix'    =>  $_POST["hidden_price"],
-        'item_quantite'   =>  $_POST["quantity"],
-		'item_dispo'   =>  $_POST["hidden_dispo"]
-        );
-        $_SESSION["shopping_cart"][0] = $item_array;
-    }
-    }
 
     if(isset($_GET["action"]))
     {
@@ -79,31 +45,35 @@ if(isset($_SESSION["user"])){
 						<th width="20%">Couleur</th>
 						<th width="15%">Total</th>
 						<th width="5%">Action</th>
-						<th width="5%">Action</th>
+
 					</tr>
 					<?php
 					if(!empty($_SESSION["shopping_cart"]))
 					{
 						$total = 0;
+						$fraisport = 0;
+						$totalCharge = 0;
 						foreach($_SESSION["shopping_cart"] as $keys => $values)
 						{
 					?>
 						<tr>
 							<td><?php echo $values["item_ref"]; ?></td>
 							<td> <input value=<?php echo $values["item_quantite"]; ?> name="quantity" min='0' max=<?php echo $values["item_dispo"]; ?> type='number' class='quantite'></td>
-							<td><?php echo $values["item_quantite"]; ?></td>
 							<td>$ <?php echo $values["item_prix"]; ?></td>
-							<td>$ <?php echo $values["item_couleur"]; ?></td>
+							<td> <?php echo $values["item_couleur"]; ?></td>
 							<td>$ <?php echo number_format($values["item_quantite"] * $values["item_prix"], 2);?></td>
 							<td><a href="panier.php?action=delete&reference=<?php echo $values["item_ref"]; ?>"> <span class="text-danger">Remove</span></a></td>
 						</tr>
 						<?php
+							$taille = (int)$values["item_poids"];
 							$total = $total + ($values["item_quantite"] * $values["item_prix"]);
+							$fraisport = $fraisport + ($taille * 0.02);
+							$totalCharge = $total + $fraisport;
 						}
 						?>
 						<tr>
-							<td colspan="5" align="right">Montant</td>
-							<td align="right">$ <?php echo number_format($total, 2); ?></td>
+							<td colspan="4" align="right">Montant</td>
+							<td align="right">$ <?php echo number_format($totalCharge, 2); echo "(" .$total. "+" .$fraisport. ")" ;?></td>
 							<td>
 								<form action="commande.php" method="post">
 									<input type="hidden" name="name" value="<?php echo $values["item_ref"]; ?>">
@@ -111,7 +81,7 @@ if(isset($_SESSION["user"])){
 									<input type="hidden" name="price" value="<?php echo $values["item_prix"]; ?>">
 									<input type="hidden" name="qty" value="<?php echo $values["item_couleur"]; ?>">
 									<input type="hidden" name="price" value="<?php echo $values["item_dispo"]; ?>">
-									<input type="hidden" name="total" value="<?php echo $total ?>">
+									<input type="hidden" name="total" value="<?php echo $totalCharge ?>">
 									<input type="submit" value="Passer commande">
 								</form>
 							</td>
@@ -123,6 +93,7 @@ if(isset($_SESSION["user"])){
 					?>
 						
 				</table>
+				<button style="width: 5%; padding: 5px; font-size: 0.85em" onclick="window.location.href='../espace_commun/accueilCommun.php?accueil=1';">Revenir à l'accueil</button>
 			</div>
 		
 	</body>

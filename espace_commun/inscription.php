@@ -4,16 +4,7 @@ session_start();
 
 require('../src/log.php');
 
-if(isset($_SESSION['connect'])){
-	function alert($msg) {
-		echo "<script type='text/javascript'>alert('$msg');</script>";
-	}
-	alert("Pas besoin de s'inscrire, vous êtes déjà connecté");
-	
-	header('location: accueilCommun.php');
 
-	exit();
-}
 
 if(isset($_POST["ok"])){
 
@@ -145,7 +136,7 @@ if(isset($_POST["ok"])){
 
 	<header>
       	<div id="brand">
-         	<a href= "accueilCommun.php" ><img src="../img/logo.png" alt="LOGO" /></a>
+         	<a href= "accueilCommun.php?accueil=1" ><img src="../img/logo.png" alt="LOGO" /></a>
       	</div>
    	</header>
 	

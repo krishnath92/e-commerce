@@ -16,7 +16,8 @@ if(isset($_SESSION["user"])){
                     'item_couleur'     =>  $_POST["hidden_color"],
                     'item_prix'    =>  $_POST["hidden_price"],
                     'item_quantite'   =>  $_POST["quantity"],
-                    'item_dispo'   =>  $_POST["hidden_dispo"]
+                    'item_dispo'   =>  $_POST["hidden_dispo"],
+                    'item_poids'  =>  $_POST["hidden_poids"]
                 );
                 $_SESSION["shopping_cart"][$count] = $item_array;
                 }
@@ -32,7 +33,8 @@ if(isset($_SESSION["user"])){
         'item_couleur'     =>  $_POST["hidden_color"],
         'item_prix'    =>  $_POST["hidden_price"],
         'item_quantite'   =>  $_POST["quantity"],
-        'item_dispo'   =>  $_POST["hidden_dispo"]
+        'item_dispo'   =>  $_POST["hidden_dispo"],
+        'item_poids'  =>  $_POST["hidden_poids"]
         );
         $_SESSION["shopping_cart"][0] = $item_array;
     }
@@ -210,6 +212,7 @@ if(isset($_GET['reference']) AND !empty($_GET['reference'])){
                     <h4><b>REFERENCE</b>: <?= $getRef;?> </h4> <input type="hidden" name="hidden_ref" value="<?= $getRef;?>" />
                     <h4><b>PRIX</b>: <?= $prixTTC_Vêtement?> </h4> <input type="hidden" name="hidden_price" value="<?= $prixTTC_Vêtement?>" />
                     <h4><b>COULEUR</b>: <?=$couleur_Vêtement?> </h4> <input type="hidden" name="hidden_color" value="<?=$couleur_Vêtement?>" />
+                    <h4><b>POIDS</b>: <?=$poids_Vêtement?> g </h4> <input type="hidden" name="hidden_poids" value="<?=$poids_Vêtement?>" />
                     <h4><b>TAILLE</b>: <input class='box' list='Taille' name='Taille' placeholder='M'></h4>
                     <h4><b>QUANTITE</b>: <input value=1 name="quantity" min='0' max='9999' type='number' class='quantite'></h4>
                     <h4><b>DISPONIBILITE</b>: <?= $nbr_Vêtement?> </h4> <input type="hidden" name="hidden_dispo" value="<?= $nbr_Vêtement?>" />
