@@ -9,7 +9,7 @@
       $_SESSION['records-limit'] = $_POST['records-limit'];
   }
   
-  $limit = isset($_SESSION['records-limit']) ? $_SESSION['records-limit'] : 5;
+  $limit = isset($_SESSION['records-limit']) ? $_SESSION['records-limit'] : 12;
   $page = (isset($_GET['page']) && is_numeric($_GET['page']) ) ? $_GET['page'] : 1;
   $paginationStart = ($page - 1) * $limit;
   //$articles = $db->query("SELECT * FROM products order by nombre_stock asc LIMIT $paginationStart, $limit")->fetchAll();
@@ -55,10 +55,12 @@
                 <button class="bi bi-search"  type="submit" name ="ok"></button>
             </div><hr/>
         </form>
+        <form method='get' action=''>
+        <button style="width: 5%; padding: 5px; font-size: 0.85em" type="submit" name ="reset">Reset</button>    </form>
 
     <?php
         /////////////   ALGORITHME DE RECHERCHE /////////////
-        if (!isset($_GET['search'])){
+        if (!isset($_GET['search']) or isset($_POST['reset'])){
             // Get total records
             $sql = $db->query("SELECT count(id) AS id FROM products")->fetchAll();
             $allRecrods = $sql[0]['id'];
@@ -89,11 +91,9 @@
                                         LIMIT $paginationStart, $limit");
             $recupArticle->execute(array($carac,$carac,$carac,$carac,$carac,$carac));        
             
-            // Get total records
-            $sql = $db->query("SELECT count(id) AS id FROM products")->fetchAll();
-            $allRecrods = $sql[0]['id'];
+        
             // Calculate total pages
-            $totoalPages = ceil($allRecrods / $limit);
+            $totoalPages = ceil($nbrArticle / $limit);
             // Prev + Next
             $prev = $page - 1;
             $next = $page + 1;
@@ -171,17 +171,42 @@
         <nav aria-label="Page navigation example mt-5">
             <ul class="pagination justify-content-center">
                 <li class="page-item <?php if($page <= 1){ echo 'disabled'; } ?>">
+
+                <?php if (!isset($_GET['search']) or isset($_POST['reset'])) { ?>
                     <a class="page-link"
-                        href="<?php if($page <= 1){ echo '#'; } else { echo "?page=" . $prev; } ?>">Previous</a>
+                    href="<?php if($page <= 1){ echo '#'; } else { echo "?page=" . $prev; } ?>">Previous</a>
+                    <?php  } ?>
+
+                    <?php if (isset($_GET['search'])) { ?>
+                        <a class="page-link"
+                        href="<?php if($page <= 1){ echo '#'; } else { echo "?search=".$_GET['search']."&page=" . $prev; } ?>">Previous</a>
+                        <?php  } ?>
                 </li>
                 <?php for($i = 1; $i <= $totoalPages; $i++ ): ?>
                 <li class="page-item <?php if($page == $i) {echo 'active'; } ?>">
-                    <a class="page-link" href="articles.php?page=<?= $i; ?>"> <?= $i; ?> </a>
+
+                <?php if (!isset($_GET['search']) or isset($_POST['reset'])) { ?>
+                    <a class="page-link"
+                     <a class="page-link" href="articles.php?page=<?= $i; ?>"> <?= $i; ?> </a>
+                     <?php  } ?>
+
+
+                <?php if (isset($_GET['search'])) { ?>
+                    <a class="page-link"
+                    <a class="page-link" href="articles.php?search=<?= $_GET['search']; ?>&page=<?= $i; ?>"> <?= $i; ?> </a>
+                    <?php  } ?>
                 </li>
                 <?php endfor; ?>
                 <li class="page-item <?php if($page >= $totoalPages) { echo 'disabled'; } ?>">
+                    
+                <?php if (!isset($_GET['search']) or isset($_POST['reset'])) { ?>
                     <a class="page-link"
-                        href="<?php if($page >= $totoalPages){ echo '#'; } else {echo "?page=". $next; } ?>">Next</a>
+                    href="<?php if($page >= $totoalPages){ echo '#'; } else {echo "?page=". $next; } ?>">Next</a>
+                    <?php  } ?>
+                    <?php if (isset($_GET['search'])) { ?>
+                        <a class="page-link"
+                        href="<?php if($page >= $totoalPages){ echo '#'; } else {echo "?search=".$_GET['search']."&page=". $next; } ?>">Next</a>
+                        <?php  } ?>
                 </li>
             </ul>
         </nav>
@@ -197,3 +222,4 @@
     </script>
 </body>
 </html>
+
