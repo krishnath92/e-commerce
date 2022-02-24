@@ -19,3 +19,4 @@ if(isset($_GET['email']) AND !empty($_GET['email'])){
     "L'identifiant n'a pas été récupéré ";
 }
 ?>
+

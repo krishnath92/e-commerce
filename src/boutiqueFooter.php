@@ -14,7 +14,7 @@
     <a href="#">Remise</a>
   </div>
   <div style="text-align:center">
-    <span style="font-weight:bold;">2021 Â© HARIATE Elies - ENGAMBE Mathias - THEVAKUMARAN Krishnath - LECORRE Antoine - GELY Tom</span>
+    <span style="font-weight:bold;">2021 Â© ENGAMBE Mathias - THEVAKUMARAN Krishnath </span>
   </div>
 </footer>
   
