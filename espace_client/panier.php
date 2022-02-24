@@ -65,9 +65,9 @@ if(isset($_SESSION["user"])){
 							<td><a href="panier.php?action=delete&reference=<?php echo $values["item_ref"]; ?>"> <span class="text-danger">Remove</span></a></td>
 						</tr>
 						<?php
-							$taille = (int)$values["item_poids"];
+							$poids = (int)$values["item_poids"];
 							$total = $total + ($values["item_quantite"] * $values["item_prix"]);
-							$fraisport = $fraisport + ($taille * 0.02);
+							$fraisport = $fraisport + ($poids * 0.02);
 							$totalCharge = $total + $fraisport;
 						}
 						?>

@@ -129,7 +129,6 @@
                         <th scope="col">Sous-categorie</th>
                         <th scope="col">Description</th>
                         <th scope="col">Couleur</th>
-                        <th scope="col">Tailles disponibles</th>
                         <th scope="col">Couleur</th>
                         <th scope="col">Prix d'achat HT</th>
                         <th scope="col">Prix de vente HT</th>
@@ -151,7 +150,6 @@
                         <td><?= $article['sous_categorie']; ?></td>
                         <td><?= $article['description']; ?></td>
                         <td><?= $article['couleur']; ?></td>
-                        <td><?= $article['taille']; ?></td>
                         <td><?= $article['couleur']; ?></td>
                         <td><?= $article['prix_achat_HT']; ?></td>
                         <td><?= $article['prix_vente_HT']; ?></td>
