@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : dim. 02 jan. 2022 à 11:30
--- Version du serveur : 10.4.19-MariaDB
--- Version de PHP : 8.0.7
+-- Généré le : mer. 23 fév. 2022 à 17:45
+-- Version du serveur : 10.4.22-MariaDB
+-- Version de PHP : 7.4.27
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données : `projet-ecommerce-v6`
+-- Base de données : `projet-ecommerce`
 --
 
 -- --------------------------------------------------------
@@ -43,12 +43,24 @@ INSERT INTO `admin` (`email`, `motdepasse`, `id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Structure de la table `facture`
+-- Structure de la table `factures`
 --
 
-CREATE TABLE `facture` (
-  `numCommande` int(11) NOT NULL
+CREATE TABLE `factures` (
+  `id_facture` int(11) NOT NULL,
+  `id_client` varchar(20) NOT NULL,
+  `prix` int(11) NOT NULL,
+  `reference` varchar(50) NOT NULL,
+  `quantite` int(11) NOT NULL,
+  `couleur` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Déchargement des données de la table `factures`
+--
+
+INSERT INTO `factures` (`id_facture`, `id_client`, `prix`, `reference`, `quantite`, `couleur`) VALUES
+(3, 'h-335', 72, 'JoggingAdidasN1', 1, 'Blanc');
 
 -- --------------------------------------------------------
 
@@ -81,11 +93,8 @@ CREATE TABLE `membres` (
 --
 
 INSERT INTO `membres` (`id`, `id_client`, `email`, `blocked`, `password`, `secret`, `adresse`, `date_naissance`, `prenom`, `nom`, `pays`, `code_postal`, `adresse2`, `adresse_livraison`, `ville`, `Tél`, `civilité`) VALUES
-(1, 'V-200', 'verstappen@gmail.com', 0, 'aq1b911854a6f936e3cffe675bfeff5d9892b08e48525', '085b2813af807337b803c584d1005c65cf510bf01639761267', '77 rue du circuit court', '1997-12-22', 'Max', 'Verstappen', 'Belgique', '78842', '', 'zandvoort', 'Spa-francorchamps', '06 11 22 33 44', 'Mr'),
 (2, 'E-253', 'maengambe@gmail.com', 0, 'aq1844918d41679494b69357ea02be416aafa9d079a25', '5f892b248a1cc27a1dab8387a6f5167bdcfe24f81632071509', '178 Avenue du 17 Juin 1940', '2002-01-02', 'Mathias', 'Engambe', 'France', '92500', '2 Résidence La Lutèce', '178 Avenue du 17 Juin 1940, 2 Résidence La Lutèce', 'Rueil-Malmaison', '777375048', 'Mr'),
-(3, 'H-456', 'krish@yahoo.fr', 0, 'aq1b3cb4adf50ef6b9507e8830daf118823deefae0a25', '74efb3c2125a4fc1e1b6ccf5cb831506c373753b1632409684', 'Nanterre', '2002-01-02', 'Krishnat', 'Hassan', 'Sri Lanka', '66789', '', '1 Rue Maréchal Joffre', 'Nanterre', '06 22 33 44 55', 'Mr'),
-(4, 'C-805', 'ulysse.cochard@gmail.com', 0, 'aq18433c92daeae67a09f17251c15fde0fd2258318b25', '4b609edf6df8efd2fe878160aafa99804c72280a1639919661', '12 rue des hibiscus', '2001-04-15', 'Ulysse', 'Cochard', 'France', '92500', '', '12 rue des hibiscus', 'Rueil-Malmaison', '07 55 66 77 88', 'Mr'),
-(10, 'H-545', 'phelisiop@gmail.com', 0, 'aq16a15bbc90d7c6c501b1c2c32ac5b76fb865d926225', '7668ffcb2e4ac9f893c16dfc33c8832c689c8b2c1640012607', '77  rue du gouverneur general eboue', '2006-04-11', 'krish', 'hassan', 'France', '92130', NULL, 'qsdqsdgdsdgsdg', 'Nanterre', '0614946804', 'Mr'),
+(10, 'H-545', 'phelisiop@gmail.com', 0, 'aq16a15bbc90d7c6c501b1c2c32ac5b76fb865d926225', '7668ffcb2e4ac9f893c16dfc33c8832c689c8b2c1640012607', '77  rue du gouverneur general eboue', '2006-04-11', 'krishnath', 'hassan', 'France', '92130', NULL, 'qsdqsdgdsdgsdg', 'Nanterre', '0614946804', 'Mr'),
 (11, 'G-878', 'tomgely78@gmail.com', 0, 'aq1d4c3df8920c06532dee578e41dc90a5577593e6725', '451a2630a57aea5c3f39fbb7b9d8c795675519e11640359814', '9 rue francois Mansart', '2002-10-05', 'Tom', 'Gely', 'France', '78280', NULL, '9 rue francois Mansart', 'Guyancourt', '07 81 91 75 74', 'Mr'),
 (12, 'D-878', 'didier.dupont@gmail.com', 0, 'aq1d4c3df8920c06532dee578e41dc90a5577593e6725', '99d84e40611f1e0e7851ee7a26eb1ed4d7973f231640440285', '1 rue du bonheur', '1988-10-23', 'Didier', 'Dupont', 'France', '75000', NULL, '1 rue du bonheur', 'Paris', '06 80 90 70 60', 'Mr'),
 (13, 'B-365', 'Phil.binoche@gmail.com', 0, 'aq1d4c3df8920c06532dee578e41dc90a5577593e6725', 'b01cee678f7a628374f508b02d6522c965a799551640440717', '5 avenue Jean Jaures', '1970-02-10', 'Philippe', 'Binoche', 'France', '13000', NULL, ' 5 avenue Jean Jaures', 'Marseille', '06 10 20 30 40 ', 'Mr'),
@@ -110,8 +119,8 @@ INSERT INTO `membres` (`id`, `id_client`, `email`, `blocked`, `password`, `secre
 (32, 'R-422', 'Loloranler@gmail.com', 0, 'aq1d4c3df8920c06532dee578e41dc90a5577593e6725', '64217aa3cf6b0c2a3df97fc044a208d488b1addb1640530389', '1 Rue Georges Haussman', '1998-11-06', 'Lorenzo', 'Ranler', 'France', '66000', NULL, '1 Rue Georges Haussman', 'Reims', '06 78 78 77 91', 'Mr'),
 (33, 'A-784', 'Jeanamr@gmail.com', 0, 'aq1d4c3df8920c06532dee578e41dc90a5577593e6725', '20359390b6560921b8481591baf196ca693000dc1640530515', '1 Rue Jean Macé', '1997-02-10', 'Jean', 'Aimarre', 'France', '20000', NULL, '1 Rue Jean Macé', 'Toulon', '06 30 30 31 31', 'Mr'),
 (34, 'F-912', 'jenfnito@gmail.com', 0, 'aq1d4c3df8920c06532dee578e41dc90a5577593e6725', 'f369313b01260c97bb854e6279ef3dff432389d41640530663', '1 place du Colizée', '2005-06-03', 'Jennifer', 'Finito', 'Italie', '10000', NULL, '1 place du Colizée', 'Rome', '06 10 30 30 45', 'Mme'),
-(35, 'H-603', 'Hamilton@gmail.com', 0, 'aq10c67e4bb080125ecd451c6e91a2e8f8fb6a1a7c025', '07e0460e5093a90c582bcf4e6c76f5e8ddd3739c1640546372', '444 BackerStreet', '0985-03-15', 'Lewis', 'Hamilton', 'Angleterre', '87241', NULL, '12 Rue des Monaco', 'Steevenage', '333-777-555', 'Mr'),
-(36, 'E-788', 'goubi@gmail.com', 0, 'aq1364dc8ef50e10c8bd71f727e96887b0c405ac75925', 'c048fce1513eb31946f398e52d52f62f5d66305a1640775431', '2 avenue du 18 juin 1940', '2000-10-26', 'Alicia', 'Engambe', 'France', '92500', NULL, '2 avenue du 18 juin 1940', 'Rueil-Malmaison', '0668264420', 'Mme');
+(36, 'E-788', 'goubi@gmail.com', 0, 'aq1364dc8ef50e10c8bd71f727e96887b0c405ac75925', 'c048fce1513eb31946f398e52d52f62f5d66305a1640775431', '2 avenue du 18 juin 1940', '2000-10-26', 'Alicia', 'Engambe', 'France', '92500', NULL, '2 avenue du 18 juin 1940', 'Rueil-Malmaison', '0668264420', 'Mme'),
+(37, 'h-335', 'elieshariate@outlook.fr', 0, 'aq15176ca06b6b04e877613fe423c04907c8a2a576a25', '88f9beb403cc011726b89d8bd9487f8cb04007021645557069', '45 rue jsp', '2022-02-01', 'elies', 'hariate', 'France', '92000', NULL, '45 rue jsp', 'issy les moulineaux ', '0102030405', 'Mr');
 
 -- --------------------------------------------------------
 
@@ -464,6 +473,12 @@ ALTER TABLE `admin`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Index pour la table `factures`
+--
+ALTER TABLE `factures`
+  ADD PRIMARY KEY (`id_facture`);
+
+--
 -- Index pour la table `membres`
 --
 ALTER TABLE `membres`
@@ -474,10 +489,16 @@ ALTER TABLE `membres`
 --
 
 --
+-- AUTO_INCREMENT pour la table `factures`
+--
+ALTER TABLE `factures`
+  MODIFY `id_facture` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT pour la table `membres`
 --
 ALTER TABLE `membres`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

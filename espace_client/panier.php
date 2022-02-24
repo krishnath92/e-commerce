@@ -75,12 +75,12 @@ if(isset($_SESSION["user"])){
 							<td colspan="4" align="right">Montant</td>
 							<td align="right">$ <?php echo number_format($totalCharge, 2); echo "(" .$total. "+" .$fraisport. ")" ;?></td>
 							<td>
-								<form action="commande.php" method="post">
+								<form action="paiement.php" method="post">
 									<input type="hidden" name="name" value="<?php echo $values["item_ref"]; ?>">
 									<input type="hidden" name="qty" value="<?php echo $values["item_quantite"]; ?>">
 									<input type="hidden" name="price" value="<?php echo $values["item_prix"]; ?>">
-									<input type="hidden" name="qty" value="<?php echo $values["item_couleur"]; ?>">
-									<input type="hidden" name="price" value="<?php echo $values["item_dispo"]; ?>">
+									<input type="hidden" name="color" value="<?php echo $values["item_couleur"]; ?>">
+									<input type="hidden" name="dispo" value="<?php echo $values["item_dispo"]; ?>">
 									<input type="hidden" name="total" value="<?php echo $totalCharge ?>">
 									<input type="submit" value="Passer commande">
 								</form>

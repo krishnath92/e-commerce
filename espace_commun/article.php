@@ -178,14 +178,12 @@ if(isset($_GET['reference']) AND !empty($_GET['reference'])){
                     <div class="centre">
                         <div class="carousel_texte">
                             <div class="changeHidden">
-
                                 <div class="contenant">
                                     <div class="element">"Livraison gratuite pour les membres à partir de 20 € d'achat."</div>
                                     <div class="element">"Livraison standard à domicile en 2-4 jours."</div>
                                     <div class="element">"Un service impeccable !"</div>
                                     <div class="element">"Des produits de qualités"</div>
                                 </div>
-
                             </div>
                         </div>
                     </div>
