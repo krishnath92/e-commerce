@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : mer. 23 fév. 2022 à 17:45
+-- Généré le : ven. 25 fév. 2022 à 02:18
 -- Version du serveur : 10.4.22-MariaDB
--- Version de PHP : 7.4.27
+-- Version de PHP : 8.1.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données : `projet-ecommerce`
+-- Base de données : `projet-ecommerce-v12`
 --
 
 -- --------------------------------------------------------
@@ -48,19 +48,22 @@ INSERT INTO `admin` (`email`, `motdepasse`, `id`) VALUES
 
 CREATE TABLE `factures` (
   `id_facture` int(11) NOT NULL,
+  `num_facture` varchar(10) NOT NULL,
   `id_client` varchar(20) NOT NULL,
   `prix` int(11) NOT NULL,
   `reference` varchar(50) NOT NULL,
   `quantite` int(11) NOT NULL,
-  `couleur` varchar(50) NOT NULL
+  `date` date NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Déchargement des données de la table `factures`
 --
 
-INSERT INTO `factures` (`id_facture`, `id_client`, `prix`, `reference`, `quantite`, `couleur`) VALUES
-(3, 'h-335', 72, 'JoggingAdidasN1', 1, 'Blanc');
+INSERT INTO `factures` (`id_facture`, `num_facture`, `id_client`, `prix`, `reference`, `quantite`, `date`) VALUES
+(11, '2022000', 'H-545', 174, 'JoggingAdidasN1', 1, '2022-02-25'),
+(12, '2022000', 'H-545', 174, 'JoggingNikeN3', 1, '2022-02-25'),
+(17, '2022002', 'H-545', 21, 'brsNikeWht123', 1, '2022-02-25');
 
 -- --------------------------------------------------------
 
@@ -492,7 +495,7 @@ ALTER TABLE `membres`
 -- AUTO_INCREMENT pour la table `factures`
 --
 ALTER TABLE `factures`
-  MODIFY `id_facture` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_facture` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT pour la table `membres`
