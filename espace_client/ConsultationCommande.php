@@ -22,7 +22,7 @@ $user = $requser->fetch();
 $email = $user["email"];
 $civil = $user["civilité"];
 $nom = $user["nom"];  
-
+$prixtotal = 0;
 
 ?>
 
@@ -67,6 +67,7 @@ $nom = $user["nom"];
                 $requarticle = $db->prepare("SELECT * FROM products WHERE reference = ?");
                 $requarticle->execute(array($values["reference"]));
                 $article = $requarticle->fetch();
+                $prixtotal += $article["priceTTC"];
                 ?>
             <tr>
                 <td><?= $values["num_facture"];?></td>
@@ -79,6 +80,8 @@ $nom = $user["nom"];
             </tr>
             <?php } ?>
         </table>
+
+        <strong><p> Le prix total (avec le frais de port ):  <?= $values["prix"];?> € </p><br>
 
         
     </body>
