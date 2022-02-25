@@ -20,13 +20,25 @@ if(isset($_SESSION["user"])){
 
     $idclient = $user["id_client"];
 
+    $requser2 = $db->prepare("SELECT count(*) FROM factures WHERE id_client = ? GROUP BY num_facture");
+    $requser2->execute(array($idclient));
+    $factures = $requser2->fetchColumn();
+
+    $factures_format = sprintf("%'03d", $factures);
+    $date = date("Y");
+	$num_facture = $date.$factures_format;
+
+
 }
 
 foreach($_SESSION["shopping_cart"] as $keys => $values){
     $ref = $values['item_ref'];
     $quantite = $values['item_quantite'];
+ 
 
-    $reqfacture = "INSERT INTO `factures` (`id_facture`, `id_client`, `prix_total`, `reference`, `quantite`) VALUES (NULL, '$idclient', '$total', '$ref', '$quantite')";
+    $reqfacture = "INSERT INTO `factures` (`id_facture`,`num_facture`, `id_client`, `prix`, `reference`, `quantite`) VALUES (NULL, '$num_facture', '$idclient', '$total', '$ref', '$quantite');";
+    
+    echo($reqfacture);
     $connexion=mysqli_connect($serveur,$login,$mdp)
     or die("Connexion impossible au serveur $serveur pour $login");
 

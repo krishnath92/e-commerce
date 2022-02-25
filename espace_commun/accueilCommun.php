@@ -29,7 +29,8 @@ require('../src/connect.php');
     <header>
         <div id="brand">
             <a  href="accueilCommun.php?accueil=1" ><img src="../img/logo.png" alt="LOGO" /></a>
-            <?php if(!isset($_SESSION["admin"])){ ?> <h1 class= "h1 text-presentation" >Bienvenue sur Stunning Outfit Shop !</h1> <?php } ?>
+            <?php if(!isset($_SESSION["admin"])&&!isset($_SESSION["user"])){ ?> <h1 class= "h1 text-presentation" >Bienvenue sur Stunning Outfit Shop !</h1> <?php } ?>
+            <?php if(isset($_SESSION["user"])){ ?> <h1 class= "h1 text-presentation-user" >Bienvenue sur Stunning Outfit Shop !</h1> <?php } ?>
             <?php if(isset($_SESSION["admin"])){ ?> <h1 class= "h1 text-presentation-admin" >Bienvenue sur  l'espace admin  de Stunning Outfit Shop !</h1> <?php } ?>
             <form method='get' action=''>
                 <div class="search-container">
@@ -44,7 +45,7 @@ require('../src/connect.php');
                 <div class="dropdown-content">          
                     <a style='color:white;' href="../espace_client/logout.php">Se déconnecter</a>
                     <a style='color:white;' href="../espace_client/profil.php">Consulter son profil</a>
-                    <a style='color:white;' href="../espace_client/logout.php">Consulter ses commandes</a>
+                    <a style='color:white;' href="../espace_client/historique.php">Consulter ses commandes</a>
                 
                 </div>
             </li>
