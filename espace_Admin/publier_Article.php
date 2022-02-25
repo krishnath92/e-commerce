@@ -16,7 +16,7 @@ if(isset($_POST['ok'])){
     if (!empty($marque) AND !empty($reference) AND !empty($stock) AND 
         !empty($categorie) AND !empty($sousCat) AND !empty($prix_achat_HT) AND 
         !empty($prix_vente_HT) AND !empty($priceTTC) AND !empty($TVA) AND 
-        !empty($couleur) AND !empty($description) AND !empty($taille) AND 
+        !empty($couleur) AND !empty($description)  AND 
         !empty($poids)) {
         
             if (isset($_FILES['img']) AND $_FILES['img']['error'] == 0 ) {
@@ -55,10 +55,10 @@ if(isset($_POST['ok'])){
 		}
 
             $insererArticle = $db->prepare('INSERT INTO products(marque, reference, nombre_stock, categorie, sous_categorie, 
-            prix_achat_HT, prix_vente_HT, priceTTC, tauxTVA, poids,couleur, description, taille, image) VALUES(?,?,?, ?,?,?, ?,?,?, ?,?,?, ?,?)');
+            prix_achat_HT, prix_vente_HT, priceTTC, tauxTVA, poids,couleur, description, image) VALUES(?,?,?, ?,?,?, ?,?,?, ?,?,?)');
             $insererArticle->execute(array($marque, $reference, $stock,$categorie, $sousCat, $prix_achat_HT, $prix_vente_HT, $priceTTC, $TVA, 
                                     $poids, $couleur, $description, 
-                                    $taille, $nom_Image));
+                                     $nom_Image));
 
             echo "L'article a bien été ajouté avec succès";
             header('Location: articles.php');
@@ -154,10 +154,7 @@ if(isset($_POST['ok'])){
                     <td> Détails du produit : </td> 
                     <td> <textarea name = "description"></textarea> </td>
                 </tr>
-                <tr>
-                    <td> Tailles disponibles : </td> 
-                    <td> <input type="text" name = "taille" placeholder="L,XL ou 36-38"> </td>
-                </tr>
+
                 <tr>
                 <td style='padding-top:15px;padding-bottom:5px;'><p> Veuillez télécharger une image et la nommer convenablement au préalable </p></td>
                     <td style='padding-top:15px;'> </td>

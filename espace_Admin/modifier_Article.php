@@ -24,7 +24,6 @@ if(isset($_GET['reference']) AND !empty($_GET['reference'])){
         $remise_Vêtement = $article_Infos['remise'];
         $poids_Vêtement = $article_Infos['poids'];
         $couleur_Vêtement = $article_Infos['couleur'];
-        $taille_Vêtement = $article_Infos['taille'];
         $description_Vêtement = $article_Infos['description'];
         $image_Vêtement = $article_Infos['image'];
 
@@ -41,7 +40,7 @@ if(isset($_GET['reference']) AND !empty($_GET['reference'])){
             $poids_saisi = $_POST['poids'];
             $couleur_saisi = $_POST['couleur'];
             $description_saisi = $_POST['description'];
-            $taille_saisi = $_POST['taille'];
+
             
             if(!empty($marque_saisi) ){
                 $updateMarque = $db->prepare('UPDATE products SET marque = ? WHERE reference = ?');
@@ -87,10 +86,7 @@ if(isset($_GET['reference']) AND !empty($_GET['reference'])){
                 $updateDescription = $db->prepare('UPDATE products SET description = ? WHERE reference = ?');
                 $updateDescription->execute(array($description_saisi, $getRef));
             }
-            elseif (!empty($taille_saisi) ) {
-                $updateTaille = $db->prepare('UPDATE products SET taille = ? WHERE reference = ?');
-                $updateTaille->execute(array($taille_saisi, $getRef));
-            }
+
             elseif (isset($_FILES['img']) AND $_FILES['img']['error'] == 0 ) {
                 
                 if ($_FILES['img']['size'] <= 1000000) {
@@ -195,10 +191,6 @@ if(isset($_GET['reference']) AND !empty($_GET['reference'])){
                         <td> <?= $description_Vêtement?> </td>
                     </tr>
                     <tr>
-                        <td> Tailles disponibles : </td> 
-                        <td> <?= $taille_Vêtement?> </td>
-                    </tr>
-                    <tr>
                         <td> Image actuelle : </td> 
                         <td> <?= $image_Vêtement?> </td>
                     </tr>
@@ -264,10 +256,6 @@ if(isset($_GET['reference']) AND !empty($_GET['reference'])){
                 <tr>
                     <td> Détails du produit : </td> 
                     <td> <textarea name = "description"></textarea> </td>
-                </tr>
-                <tr>
-                    <td> Tailles disponibles : </td> 
-                    <td> <input type="text" name = "taille" placeholder="L,XL ou 36-38"> </td>
                 </tr>
                 <tr>
                     <td style='padding-top:15px;'> </td>

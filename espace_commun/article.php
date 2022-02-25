@@ -81,7 +81,6 @@ if(isset($_GET['reference']) AND !empty($_GET['reference'])){
         $remise_Vêtement = $article_Infos['remise'];
         $poids_Vêtement = $article_Infos['poids'];
         $couleur_Vêtement = $article_Infos['couleur'];
-        $taille_Vêtement = $article_Infos['taille'];
         $description_Vêtement = $article_Infos['description'];
         $image_Vêtement = $article_Infos['image'];
 
