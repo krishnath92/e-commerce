@@ -20,7 +20,7 @@ if(isset($_SESSION["user"])){
 
     $idclient = $user["id_client"];
 
-    $requser2 = $db->prepare("SELECT count(*) FROM factures WHERE id_client = ? GROUP BY num_facture");
+    $requser2 = $db->prepare("SELECT count(DISTINCT num_facture)+1 FROM factures WHERE id_client = ?");
     $requser2->execute(array($idclient));
     $factures = $requser2->fetchColumn();
 
