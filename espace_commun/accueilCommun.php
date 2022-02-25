@@ -167,15 +167,7 @@ require('../src/connect.php');
                 <h3 style="padding-bottom: 40px; padding-top: 40px;">Nouveauté / Promotions</h3>
                 <!-- CONTENEUR -->
                 <div id="projets">
-                    <!-- Nouveauté -->
-                    <div style="margin-bottom: 40px;" class="img-accueil">
-                        <a href="" title="Voir le premier projet" >
-                            <div class="picture-accueil">
-                                <img src="../img/new-collection-d-hiver.jpg" alt="mon premier projet"/>
-                            </div>
-                            <span>Nouvelle collection d'hiver</span>
-                        </a>
-                    </div>
+    
                     <!-- Promotion -->
                     <div style="margin-bottom: 40px;" class="img-accueil">
                         <a href="accueilCommun.php?remise=1" title="Voir le premier projet" >
