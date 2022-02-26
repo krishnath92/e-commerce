@@ -48,6 +48,8 @@ function Afficher4(){
         input.type = "password"; 
     } 
 } 
+
+
 /*e=true;
 function changer(){
 	if(e){

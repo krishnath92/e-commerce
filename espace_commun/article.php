@@ -226,7 +226,8 @@ if(isset($_GET['reference']) AND !empty($_GET['reference'])){
                             <option value='XL'>
                         </datalist>
                         <?php if(isset($_SESSION["user"])) {?>
-                            <button type="submit" name="add_to_cart" style="margin-top:5px;" class="btn btn-success" value="Add to Cart">Ajouter au panier</button>
+                            
+                            <button type="submit" name="add_to_cart" style="margin-top:5px;" class="btn btn-success" value="Add to Cart" onClick="AjoutArticle()" >Ajouter au panier</button>
                             <?php }?>
                         <?php if(!isset($_SESSION["user"])) { ?>
                             <button class="btn btn-success" type="submit" formaction='../espace_commun/connexion.php'>Connectez-vous</button>
@@ -234,6 +235,11 @@ if(isset($_GET['reference']) AND !empty($_GET['reference'])){
                     </div>
                 </div>
                 </form>
+                <script type="text/javascript">
+                function AjoutArticle() {
+                    alert("Article ajouté");
+                }
+                </script>
                 <!--
                 <div class="sliderRight"><i class="fa-solid fa-angle-right"></i></div>
                 <div class="sliderLeft"><i class="fa-solid fa-angle-left"></i></div>
@@ -259,6 +265,7 @@ if(isset($_GET['reference']) AND !empty($_GET['reference'])){
         <section>                        
             <?php require("../src/boutiqueFooter.php");?>
         </section>  
+        <script src ="../js/script.js"> </script>
     </body>
 </html>
 

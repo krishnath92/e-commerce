@@ -58,10 +58,13 @@ if(isset($_SESSION["user"])){
 					?>
 						<tr>
 							<td><?php echo $values["item_ref"]; ?></td>
-							<td> <input value=<?php echo $values["item_quantite"]; ?> name="quantity" min='0' max=<?php echo $values["item_dispo"]; ?> type='number' class='quantite'></td>
-							<td>$ <?php echo $values["item_prix"]; ?></td>
+							<td> <input id="quantite" value=<?php echo $values["item_quantite"]; ?> name="quantity" min='0' max=<?php echo $values["item_dispo"]; ?> type='number' class='quantite'>
+								<button class="btn" id="increment">+</button>
+								<button class="btn" id="decrement">-</button>
+							</td>
+							<td>$ <input id="prix" value=<?php echo $values["item_prix"]; ?>></td>
 							<td> <?php echo $values["item_couleur"]; ?></td>
-							<td>$ <?php echo number_format($values["item_quantite"] * $values["item_prix"], 2);?></td>
+							<td>$ <input id="somme" value= <?php echo number_format($values["item_quantite"] * $values["item_prix"], 2);?>></td>
 							<td><a href="panier.php?action=delete&reference=<?php echo $values["item_ref"]; ?>"> <span class="text-danger">Remove</span></a></td>
 						</tr>
 						<?php
@@ -97,4 +100,28 @@ if(isset($_SESSION["user"])){
 			</div>
 		
 	</body>
+	<script type="text/javascript">
+
+					
+		const btnI = document.getElementById("increment");
+		const btnD = document.getElementById("decrement");
+		var val = document.getElementById('quantite');
+		var somme = document.getElementById('somme');
+		var prix = document.getElementById('prix');
+
+		btnI.addEventListener("click", ()=>{
+
+			val.stepUp();
+			somme.value = prix.value*val.value;
+
+		});
+
+		btnD.addEventListener("click", ()=>{
+
+			val.stepDown();
+			somme.value = prix.value*val.value;
+
+		});
+
+	</script>
 </html>
