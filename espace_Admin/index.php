@@ -90,7 +90,7 @@ if(isset($_POST['valider'])){
 
 			</form>
 			<br>	
-			<button style="width: 40%; margin-top: 25px; padding: 5px; font-size: 0.85em" onclick="window.location.href='../espace_commun/accueilCommun.php';">Retourner à l'accueil</button>
+			<button style="width: 40%; margin-top: 25px; padding: 5px; font-size: 0.85em" onclick="window.location.href='../espace_commun/accueilCommun.php?accueil=1';">Retourner à l'accueil</button>
 
 			<!--button style="width: 40%; padding: 5px; font-size: 0.85em; " onclick="window.location.href='accueil.php';">Revenir à l'accueil</button-->
 		</div>
