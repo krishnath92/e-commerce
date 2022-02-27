@@ -24,29 +24,25 @@ if(isset($_SESSION["user"])){
     $factures_format = sprintf("%'03d", $factures);
     $date = date("Y");
     $num_facture = $date.$factures_format;
-
-
 }
 
 foreach($_SESSION["shopping_cart"] as $keys => $values){
-    $ref = $values['item_ref'];
-    $quantite = $values['item_quantite'];
+    $ref = $values['item_id'];
+    $quantite = $values['item_dispo'] - $values['item_quantite'];
     
-
-    $reqfacture = "INSERT INTO `factures` (`id_facture`,`num_facture`, `id_client`, `prix`, `reference`, `quantite`) VALUES (NULL, '$num_facture', '$idclient', '$total', '$ref', '$quantite');";
-
-
     $connexion=mysqli_connect($serveur,$login,$mdp)
     or die("Connexion impossible au serveur $serveur pour $login");
 
     $conn = mysqli_select_db($connexion,$bd)
     or die("Impossible d'accéder à la base de données");
 
+    $reqfacture = "INSERT INTO `factures` (`id_facture`,`num_facture`, `id_client`, `prix`, `reference`, `quantite`) VALUES (NULL, '$num_facture', '$idclient', '$total', '$ref', '$quantite');";
+
+    $updateTaille = $db->prepare('UPDATE taille SET dispo = ? WHERE id_ref = ?');
+    $updateTaille->execute(array($quantite, $ref));
+
     mysqli_query($connexion,$reqfacture);
 }
-
-
-
 
 
 $requete3 ="SELECT `email` FROM `membres` WHERE id_client = '$idclient'";
