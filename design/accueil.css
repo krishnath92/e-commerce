@@ -23,8 +23,10 @@ body {
 
 
 header #brand img  {
-	margin:auto;
-	height:60px;
+	margin-top: 25%;
+    margin-left:45%;
+	height:55px;
+    width: 55px;
 }
 #brand {
     display: flex;
@@ -129,6 +131,8 @@ h3{
     font-size: 3.2em;
 
     font-weight: 300;
+    margin-left: 7%;
+    margin-right: 2%;
 		
 }
 

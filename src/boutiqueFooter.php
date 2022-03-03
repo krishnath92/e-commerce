@@ -8,10 +8,10 @@
     <a href="#" class="fab fa-pinterest"></a>
   </div>
   <div class="links">
-    <a href="#">Accueil</a>
-    <a href="#">Homme</a>
-    <a href="#">Femme</a>
-    <a href="#">Remise</a>
+    <a href="../espace_commun/accueilCommun.php?accueil=1">Accueil</a>
+    <a href="../espace_commun/accueilCommun.php?homme=1">Homme</a>
+    <a href="../espace_commun/accueilCommun.php?femme=1">Femme</a>
+    <a href="../espace_commun/accueilCommun.php?remise=1">Remise</a>
   </div>
   <div style="text-align:center">
     <span style="font-weight:bold;">2021 Â© ENGAMBE Mathias - THEVAKUMARAN Krishnath - HARIATE Elies - GELY Tom </span>

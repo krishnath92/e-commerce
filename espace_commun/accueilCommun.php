@@ -94,10 +94,6 @@ require('../src/connect.php');
             </ul>
         </nav>
 
-        <?php
-        if(isset($_GET['success'])&&isset($_SESSION["admin"]))
-            echo'<div class="alert success">Vous êtes maintenant connecté en tant qu\'administrateur du site web.</div>';
-        ?>
     </header>
 
     <!-- MENU RECHERCHE-->
