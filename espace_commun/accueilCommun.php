@@ -29,15 +29,16 @@ require('../src/connect.php');
     <header>
         <div id="brand">
             <a  href="accueilCommun.php?accueil=1" ><img src="../img/logo.png" alt="LOGO" /></a>
-            <?php if(!isset($_SESSION["admin"])&&!isset($_SESSION["user"])){ ?> <h1 class= "h1 text-presentation" >Bienvenue sur Stunning Outfit Shop !</h1> <?php } ?>
-            <?php if(isset($_SESSION["user"])){ ?> <h1 class= "h1 text-presentation-user" >Bienvenue sur Stunning Outfit Shop !</h1> <?php } ?>
-            <?php if(isset($_SESSION["admin"])){ ?> <h1 class= "h1 text-presentation-admin" >Bienvenue sur  l'espace admin  de Stunning Outfit Shop !</h1> <?php } ?>
-            <form method='get' action=''>
+            <form method='get' action='' id="recherche">
                 <div class="search-container">
                     <input type="text" placeholder="Search.." name="search">
                     <button class="bi bi-search"  type="submit" name ="ok"></button>
                 </div>
             </form>
+            <?php if(!isset($_SESSION["admin"])&&!isset($_SESSION["user"])){ ?> <h1 class= "h1 text-presentation" >Bienvenue sur Stunning Outfit Shop !</h1> <?php } ?>
+            <?php if(isset($_SESSION["user"])){ ?> <h1 class= "h1 text-presentation-user" >Bienvenue sur Stunning Outfit Shop !</h1> <?php } ?>
+            <?php if(isset($_SESSION["admin"])){ ?> <h1 class= "h1 text-presentation-admin" >Bienvenue sur  l'espace admin  de Stunning Outfit Shop !</h1> <?php } ?>
+
         <?php if(isset($_SESSION["user"])){ ?>
             <li class="dropdown">
                 <a class="bi bi-person-circle" style="font-size: 2rem; color: black;"><?php echo $_SESSION['prenom']; ?></a>

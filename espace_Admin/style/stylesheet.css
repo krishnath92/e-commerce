@@ -14,7 +14,7 @@ body {
 	margin: 0;
 }
 #brand img {
-	background-color: black;
+	background-color: white;
 	height: 60px;
 }
 .alert {
@@ -70,9 +70,14 @@ body {
 	font-size: 1.4em ;
     color:#3030ea;
 }
+.page-link {  
+	color : #7bb488 !important 
+} 
 
-
-
+.page-item.active .page-link {
+	background-color: #d4dbe2 !important ;
+	border-color: #000 !important 
+}
 
 
 /*#bouton {
@@ -172,8 +177,8 @@ body {
 
   /*  ----------------- PUBLIER_ARTICLE.PHP  ------------------------- */
 .content-publier .table-publier{
-
-	background-color: white;
+	border-radius: 2% !important;
+	background-color: #f9f9f9;
 	border: 3px solid;
 	height: 70%;
 	width: 30%;
@@ -191,10 +196,10 @@ legend{
 
 
 .accueil-publierArticle{
-	background-color: #000000;
+	background-color: #c3e6cb;
 	border: 2px solid #1A1A1A;
 	border-radius: 15px;
-	color: #FFFFFF;
+	color: #1A1A1A;
 	font-size: 16px;
 	font-weight: 600;
 	padding: 16px 24px;
@@ -223,10 +228,10 @@ legend{
   }
 
   .ListeArticle-button{
-	background-color: #000000;
+	background-color: #c3e6cb;
 	border: 2px solid #1A1A1A;
 	border-radius: 15px;
-	color: #FFFFFF;
+	color: #1A1A1A;
 	font-size: 16px;
 	font-weight: 600;
 	padding: 16px 24px;

@@ -55,7 +55,10 @@ h3{
 }
 
 /*  ----------------- SEARCH BAR  ------------------------- */
+.search-container{
+    display: inline-block;
 
+}
 .search-container input[type=text] {
     padding: 6px;
     margin-top: 13px;
@@ -80,6 +83,7 @@ h3{
     background-color: white;
     color: black;
     border: none;
+
 }
 /*  ----------------- IMAGE TURN  ------------------------- */
 .images{
@@ -90,6 +94,7 @@ h3{
 	animation-name: mesImages;
 	animation-iteration-count: infinite;
 }
+
 
 /*  ----------------- BIENVENU MATEK SHOP DESIGN ------------------------- */
 .text-client {
@@ -103,17 +108,18 @@ h3{
 .text-presentation {
     color: #273849;
     font-size: 3em;
-    margin-left: 30%;
-    margin-right: 5%;
+    margin-left: 16%;
+    margin-right: 15%;
     font-weight: 300;
 		
 }
 
+
 .text-presentation-user {
     color: #273849;
     font-size: 3em;
-    margin-left: 23%;
-    margin-right: 5%;
+    margin-left: 15%;
+    margin-right: 8%;
     font-weight: 300;
 		
 }
@@ -121,8 +127,7 @@ h3{
 .text-presentation-admin {
     color: #273849;
     font-size: 3.2em;
-    margin-left: 27%;
-    margin-right: 5%;
+
     font-weight: 300;
 		
 }
@@ -215,6 +220,8 @@ h3{
     z-index: 0;
     border-radius: 10px;
     margin-top: 14px;
+    margin-left: 2%;
+    margin-right: 2%;
 }
 
 
@@ -233,6 +240,7 @@ h3{
     background-color: white;
     font-size: 1.2rem;
     margin-left: 2%;
+    margin-right: 2%;
 }
 
 .glow-on-hover-connexion:hover {
@@ -253,6 +261,10 @@ h3{
 .dropdown {
     margin-bottom: 0%;
   }
+
+#recherche{
+    margin-left: 5%;
+}
   
   .dropdown a {
     display: inline-block;
@@ -260,6 +272,8 @@ h3{
     text-align: center;
     padding: 11px 16px;
     text-decoration: none;
+    margin-left: 20px;
+
   }
   
   .dropdown a:hover, .dropdown:hover{

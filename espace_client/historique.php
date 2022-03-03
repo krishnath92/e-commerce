@@ -20,13 +20,14 @@ $factures = $requser2->fetchAll();
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="../design/table.css">
 	</head>
 	<body>
 		<header>
 		</header>
 			<div style="clear:both"></div>
 			<br />
-			<h3>Historique de commandes</h3>
+			<h1>Historique de commandes</h1>
 			<div class="table-responsive">
 				<table class="table table-bordered">
 					<tr>
@@ -48,6 +49,6 @@ $factures = $requser2->fetchAll();
                     </tr>
                     <?php } ?>
                 </table>
-				<button style="width: 5%; padding: 5px; font-size: 0.85em" onclick="window.location.href='../espace_commun/accueilCommun.php?accueil=1';">Revenir à l'accueil</button>
+				<button id="boutonHistorique" style="width: 5%; padding: 5px; font-size: 0.85em" onclick="window.location.href='../espace_commun/accueilCommun.php?accueil=1';">Revenir à l'accueil</button>
     </body>
 </html>
