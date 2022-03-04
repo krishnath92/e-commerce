@@ -103,10 +103,6 @@ if(!empty($_POST['email']) && !empty($_POST['password'])){
 </head>
 <body>
 
-<div id="brand" >
-	<a href="accueilCommun.php?accueil=1" ><img style="height: 55px" src="../img/logo.png" alt=""></a>
-</div>
-
 	<section>
 		<div id="login-body">
 				

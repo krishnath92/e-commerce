@@ -56,6 +56,21 @@ h3{
 
 }
 
+/* button sucess */
+
+.btn-success{
+    background-color : #4fc0a6 !important;
+}
+
+h4{
+    line-height: 2.5;
+}
+
+/* article.php */
+#taille{
+    width: 100%;
+}
+
 /*  ----------------- SEARCH BAR  ------------------------- */
 .search-container{
     display: inline-block;
@@ -739,7 +754,11 @@ a{
 
     border-radius: 15px;
 	text-align: left;
-    margin-top: 5%;
+}
+
+b{
+    font-size: 1.5rem;
+
 }
 
 

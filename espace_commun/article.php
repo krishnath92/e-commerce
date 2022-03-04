@@ -129,22 +129,27 @@ if(isset($_GET['reference']) AND !empty($_GET['reference'])){
     <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400&display=swap" rel="stylesheet">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="../design/accueil.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+        <link rel="stylesheet" type="text/css" href="../design/accueil.css">
     <title>Accueil </title>
     </head>
         <body id = "accueil-body">
             <header>
                 <div id="brand">
                     <a  href="accueilCommun.php?accueil=1" ><img src="../img/logo.png" alt="LOGO" /></a>
-                    <?php if(!isset($_SESSION["admin"])){ ?> <h1 class= "h1 text-presentation" >Bienvenue sur Stunning Outfit Shop !</h1> <?php } ?>
+                    <form method='get' action='' id="recherche">
+                        <div class="search-container">
+                            <input type="text" placeholder="Search.." name="search">
+                            <button class="bi bi-search"  type="submit" name ="ok"></button>
+                        </div>
+                    </form>
+                    <?php if(!isset($_SESSION["admin"])&&!isset($_SESSION["user"])){ ?> <h1 class= "h1 text-presentation" >Bienvenue sur Stunning Outfit Shop !</h1> <?php } ?>
                     <?php if(isset($_SESSION["admin"])){ ?> <h1 class= "h1 text-presentation-admin" >Bienvenue sur  l'espace admin  de Stunning Outfit Shop !</h1> <?php } ?>
-                    <div class="search-container">
-                        <input type="text" placeholder="Search.." name="search">
-                        <button class="bi bi-search"  type="submit"></button>
-                    </div>
+                    <?php if(isset($_SESSION["user"])){ ?> <h1 class= "h1 text-presentation-user" >Bienvenue sur Stunning Outfit Shop !</h1> <?php } ?>
+
                     <?php if(isset($_SESSION["user"])){ ?>
-                    <li class="dropdown">
+
+                        <li class="dropdown">
                         <a class="bi bi-person-circle" style="font-size: 2rem; color: black;"><?php echo $_SESSION['prenom']; ?></a>
 
                         <div class="dropdown-content">          
@@ -240,7 +245,7 @@ if(isset($_GET['reference']) AND !empty($_GET['reference'])){
                             <h4><b>POIDS</b>: <?=$poids_Vêtement?> g </h4> <input type="hidden" name="hidden_poids" value="<?=$poids_Vêtement?>" />
                             <h4><b>TAILLE</b>: 
                             <select name="taille" id="taille">
-                                <option  selected disabled hidden>L</option>
+                                <option  selected disabled hidden>Choisir la taille</option>
                                     <?php 
                                          while($article = $recupTaille->fetch()) 
                                         {

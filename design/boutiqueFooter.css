@@ -1,16 +1,26 @@
-*, ::before, ::after {
-    box-sizing: border-box;
-    margin: 0;
+html {
     padding: 0;
-
+    margin: 0;
+    height: 100%;
 }
 
 body {
-    background-color: #dad3e762;
     font-family: Arial, Helvetica, sans-serif;
-    height: 100vh;
+    height: 100%;
     display: flex;
     flex-direction: column;
+    padding: 0;
+    margin: 0;
+    background-size: cover;
+    background-position: center;
+    min-height: 100%;
+
+}
+
+html {
+    padding: 0;
+    margin: 0;
+    height: 100%;
 }
 
 
@@ -22,8 +32,9 @@ footer {
     background: #1f2933;
     color: white;
     padding-bottom: 20px;
-    margin-top: 100px;
+    margin-top: 11%;
     text-align: center;
+    bottom: 0;
 }
 
 

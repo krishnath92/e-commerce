@@ -37,6 +37,7 @@ $prixtotal = 0;
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="../design/commande.css">
         <title>PDF</title>
     </head>
     <body>
@@ -44,15 +45,15 @@ $prixtotal = 0;
         <p><?= $civil ?> <?= $nom?>, nous vous remercions pour votre commande et espérons que vous serez satisfait de votre livraison.</p><br>
         <p>Vous trouverez ci-dessous les informations essentielles de votre commande. </p><br>
 
-        <strong><p>Information sur votre commande :  <br></strong>
-        <br>Numéro de commande : <?= $num_facture;?>
-        </p><br>
+        <strong><p>Information sur votre commande :  </p><br></strong>
+        <br><p>Numéro de commande : <?= $num_facture;?><p>
+        <br>
 
-        <strong><p>Adresse de livraison :  <br></strong>
-        <br> <?= $user["adresse_livraison"];?>
-        </p><br>
+        <strong><p>Adresse de livraison :  </p><br></strong>
+        <br> <p><?= $user["adresse_livraison"];?><p>
+        <br>
 
-        <strong> <p>Information sur votre commande :  <br></strong>
+        <strong> <p>Information sur votre commande : </p><br></strong>
         <table class="table table-bordered" >
             <tr>
                 <th width="15%">Numéro de facture </th>

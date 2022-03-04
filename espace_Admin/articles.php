@@ -25,6 +25,8 @@
     <link rel="icon" type="image/png" href="img/favicon.png">
     <link rel="stylesheet" href="style/miniDesign">
     <link rel="stylesheet" href="style/stylesheet.css" >
+    <link rel="stylesheet" type="text/css" href="../design/boutiqueFooter.css">
+    <link rel="stylesheet" type="text/css" href="../design/accueil.css">
 
     <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="../design/accueil.css">
@@ -43,20 +45,22 @@
 </head>
 <body>
 <?php logoAdmin(); ?>
-    
-    
+
+
     <div class=" mt-5">
-        <h1 class="text-center mb-5">Les articles</h1>
-        <!-- Search form -->
-        <!--input class="form-control w-25 mx-auto" type="text" placeholder="Search" name="search" aria-label="Search"-->   
-        <form method='get' action=''>
-            <div class="search-container">
-                <input type="text" placeholder="Search.." name="search">
-                <button class="bi bi-search"  type="submit" name ="ok"></button>
-            </div><hr/>
-        </form>
-        <form method='get' action=''>
-        <button style="width: 5%; padding: 5px; font-size: 0.85em" type="submit" name ="reset">Reset</button>    </form>
+        <div class="head-client">
+            <h1 class="text-article">Les articles</h1>
+            <!-- Search form -->
+            <!--input class="form-control w-25 mx-auto" type="text" placeholder="Search" name="search" aria-label="Search"-->
+            <form method='get' action=''>
+                <div class="search-container">
+                    <input type="text" placeholder="Search.." name="search">
+                    <button class="bi bi-search"  type="submit" name ="ok"></button>
+                </div>
+            </form>
+            <form method='get' action=''>
+            <button id="bouton-reset-article" style="width: 5%; padding: 5px; font-size: 0.85em" type="submit" name ="reset">Reset</button>    </form>
+        </div>
 
     <?php
         /////////////   ALGORITHME DE RECHERCHE /////////////
@@ -120,7 +124,7 @@
         <!-- Datatable -->
         <div class="table-responsive  mx-auto w-75 mb-5">
             <table class="table table-bordered table-hover">
-                <caption><?= "<b>Il y a " . $nbrArticle . " articles trouvés.</b>"?></caption>
+                <caption><?= "<b id='nombre-article'>Il y a " . $nbrArticle . " articles trouvés.</b>"?></caption>
                 <thead>
                     <tr class="table-success">
                         <th scope="col">#</th>
@@ -158,8 +162,8 @@
                         <td><?= $article['reference']; ?></td>
                         <td><?= $article['nombre_stock']; ?></td>
                         <td><?= $article['remise']; ?></td>
-                        <td><a href = "supprimer_Article.php?reference=<?= $article['reference']; ?>" style="color:red; text-decoration: none;"> Supprimer l'article</a></td>
-                        <td><a href = "modifier_Article.php?reference=<?= $article['reference']; ?>" style="color:red; text-decoration: none;"> Modifier l'article</a></td>
+                        <td><a href = "supprimer_Article.php?reference=<?= $article['reference']; ?>" style="color:#1f876f; text-decoration: none;"> Supprimer l'article</a></td>
+                        <td><a href = "modifier_Article.php?reference=<?= $article['reference']; ?>" style="color:#1f876f; text-decoration: none;"> Modifier l'article</a></td>
                     </tr>
                     <?php } ?>
                 </tbody>
@@ -209,6 +213,10 @@
             </ul>
         </nav>
     </div>
+    <!-- CONTACT -->
+    <section >
+        <?php require("../src/boutiqueFooter.php"); ?>
+    </section>
     <!-- jQuery + Bootstrap JS -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>

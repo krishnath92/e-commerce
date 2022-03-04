@@ -29,9 +29,11 @@
 
     <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="../design/accueil.css">
+    <link rel="stylesheet" type="text/css" href="style/stylesheet.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../design/boutiqueFooter.css">
     <title>membre</title>
     <style>
         .container {
@@ -47,19 +49,21 @@
     
     
     <div class=" mt-5">
-        <h1 class="text-center mb-5">Les clients inscrits</h1>
-        <!-- Search form -->
-        <!--input class="form-control w-25 mx-auto" type="text" placeholder="Search" name="search" aria-label="Search"-->   
-        <form method='get' action=''>
-            <div class="search-container">
-                <input type="text" placeholder="Search.." name="search">
-                <button class="bi bi-search"  type="submit" name ="ok"></button>
-            </div><hr/>
-        </form>
+        <div class="head-client">
+            <h1 class= "text-client-inscrit">Les clients inscrits</h1>
 
-        <form method='get' action=''>
-        <button style="width: 5%; padding: 5px; font-size: 0.85em" type="submit" name ="reset">Reset</button>    </form>
+            <!-- Search form -->
+            <!--input class="form-control w-25 mx-auto" type="text" placeholder="Search" name="search" aria-label="Search"-->
+            <form method='get' action=''>
+                <div class="search-container">
+                    <input type="text" placeholder="Search.." name="search">
+                    <button class="bi bi-search"  type="submit" name ="ok"></button>
+                </div>
+            </form>
 
+            <form method='get' action=''>
+            <button id="bouton-reset-client" style="width: 5%; padding: 5px; font-size: 0.85em" type="submit" name ="reset">Reset</button>    </form>
+        </div>
 
     <?php
         /////////////   ALGORITHME DE RECHERCHE /////////////
@@ -103,6 +107,7 @@
         } ?>
         
     </div>
+
         <!-- Select dropdown -->
         <div class="d-flex flex-row-reverse bd-highlight mb-3 mr-5">
             <form action="membres.php" method="post">
@@ -121,7 +126,7 @@
         <!-- Datatable -->
         <div class="table-responsive  mx-auto w-75 mb-5">
             <table class="table table-bordered table-hover">
-                <caption><?= "<b>Il y a " . $nbrClients . " clients trouvés.</b>"?></caption>
+                <caption><?= "<b id='nombre-client'>Il y a " . $nbrClients . " clients trouvés.</b>"?></caption>
                 <thead>
                 <tr class="table-success">
                         <th scope="col">#</th>
@@ -146,7 +151,7 @@
                         <td><?php echo $user['pays']; ?></td>
                         <td><?php echo $user['adresse_livraison']; ?></td>
                         <td><?php echo $user['ville']; ?></td>
-                        <td><a href = "bannir.php?email=<?= $user['email']; ?>" style="color:red; text-decoration: none;"> Bannir le membre</a></td>
+                        <td><a href = "bannir.php?email=<?= $user['email']; ?>" style="color:#1f876f; text-decoration: none;"> Bannir le membre</a></td>
                     </tr>
                     <?php } ?>
                 </tbody>
@@ -199,6 +204,10 @@
             </ul>
         </nav>
     </div>
+    <!-- CONTACT -->
+    <section >
+        <?php require("../src/boutiqueFooter.php"); ?>
+    </section>
     <!-- jQuery + Bootstrap JS -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
