@@ -4,7 +4,7 @@ session_start();
 require('../src/connect.php');
 require_once('mesFonctions.php');
 logoAdmin();
-initMenu2Admin();
+
 
 if(!$_SESSION['mdp']){
     header('location: index.php');
@@ -76,9 +76,9 @@ if(isset($_POST['ok'])){
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <!-- Bootstrap CSS -->
-     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <link rel="stylesheet" href="style/stylesheet.css" >
+    <link rel="stylesheet" type="text/css" href="../design/footerFormulaires.css">
+    <link rel="stylesheet" type="text/css" href="../design/articleFormulaires.css">
+
     <link rel="icon" type="image/png" href="../img/favicon.png">
     
     <title>Ajouter un article</title>
@@ -92,89 +92,95 @@ if(isset($_POST['ok'])){
 
         } 
     ?>
-    <form method="POST" action="" enctype="multipart/form-data">
-    <legend style="font-weight:bold; font-size:1.3em;">Ajouter un nouvel Article</legend>
-        <fieldset class ="content-publier">
-            <table class="table-publier">
-                <tr>
-                    <td> Marque : </td> 
-                    <td> <input type="text" name = "marque" placeholder="ex: Nike, Addidas" autofocus> </td>
-                </tr>
-                <tr>
-                    <td> Réference : </td> 
-                    <td> <input type="text" name = "reference" placeholder="ex: nikeJogBlack1"> </td>
-                </tr>
-                <tr>
-                    <td> Nombre d'articles en stock : </td> 
-                    <td> <input type="number" name = "stock" placeholder="ex: 10"> </td>
-                </tr>
-                <tr>
-                    <td> Catégorie : </td> 
-                    <td> <select name="categorie" required>
-                            <option value="">Choisir...</option>
-                            <option>Homme</option>
-                            <option>Femme</option>
-                        </select> </td>
-                </tr>
-                <tr>
-                    <td> Sous-catégorie : </td> 
-                    <td> <input type="text" name = "sousCat" placeholder="Jogging, brassière, short"> </td>
-                </tr>
-                <tr>
-                    <td> Le prix d'achat (HT en €) : </td> 
-                    <td> <input type="float" name = "prix_achat_HT" placeholder="37.50"> </td>
-                </tr>
-                <tr>
-                    <td> Le prix de vente (HT en €) : </td> 
-                    <td> <input type="float" name = "prix_vente_HT" placeholder="ex: 37.50"> </td>
-                </tr>
-                <tr>
-                    <td> Taux TVA (en %) : </td> 
-                    <td> <input type="float" name = "TVA" placeholder="ex: 20"> </td>
-                </tr>
+    <div id="login-body">
+        <form method="POST" action="" enctype="multipart/form-data">
+        <legend style="font-weight:bold; font-size:1.3em;">Ajouter un nouvel Article</legend>
+            <fieldset class ="content-publier">
+                <table class="table-publier">
+                    <tr>
+                        <td> Marque : </td>
+                        <td> <input type="text" name = "marque" placeholder="ex: Nike, Addidas" autofocus> </td>
+                    </tr>
+                    <tr>
+                        <td> Réference : </td>
+                        <td> <input type="text" name = "reference" placeholder="ex: nikeJogBlack1"> </td>
+                    </tr>
+                    <tr>
+                        <td> Nombre d'articles en stock : </td>
+                        <td> <input type="number" name = "stock" placeholder="ex: 10"> </td>
+                    </tr>
+                    <tr>
+                        <td> Catégorie : </td>
+                        <td> <select name="categorie" required>
+                                <option value="">Choisir...</option>
+                                <option>Homme</option>
+                                <option>Femme</option>
+                            </select> </td>
+                    </tr>
+                    <tr>
+                        <td> Sous-catégorie : </td>
+                        <td> <input type="text" name = "sousCat" placeholder="Jogging, brassière, short"> </td>
+                    </tr>
+                    <tr>
+                        <td> Le prix d'achat (HT en €) : </td>
+                        <td> <input type="float" name = "prix_achat_HT" placeholder="37.50"> </td>
+                    </tr>
+                    <tr>
+                        <td> Le prix de vente (HT en €) : </td>
+                        <td> <input type="float" name = "prix_vente_HT" placeholder="ex: 37.50"> </td>
+                    </tr>
+                    <tr>
+                        <td> Taux TVA (en %) : </td>
+                        <td> <input type="float" name = "TVA" placeholder="ex: 20"> </td>
+                    </tr>
 
-                <tr>
-                    <td> Le prix de l'article (TTC en €) : </td> 
-                    <td> <input type="float" name = "priceTTC" placeholder="ex: 50.75"> </td>
-                    
-                </tr>
-                <tr>
-                    <td style="color:red;"> Prix TTC = (Prix HT vente) x (1 + Taux TVA )</td>                     
-                </tr>      
-                        
-                <tr>
-                    <td> Poids de l'article (en g): </td> 
-                    <td> <input type="float" name = "poids" placeholder="poids en gramme"> </td>
-                </tr>
-                <tr>
-                    <td> Couleur: </td> 
-                    <td> <input type="text" name = "couleur"placeholder="Noir, Bleu"> </td>
-                </tr>
-                <tr>
-                    <td> Détails du produit : </td> 
-                    <td> <textarea name = "description"></textarea> </td>
-                </tr>
+                    <tr>
+                        <td> Le prix de l'article (TTC en €) : </td>
+                        <td> <input type="float" name = "priceTTC" placeholder="ex: 50.75"> </td>
 
-                <tr>
-                <td style='padding-top:15px;padding-bottom:5px;'><p> Veuillez télécharger une image et la nommer convenablement au préalable </p></td>
-                    <td style='padding-top:15px;'> </td>
-                </tr>
-                <tr>
-                    <td> Image de l'article : </td> 
-                    <td> <input type="file" name="img" /> </td>
-                    <td>  </td>
-                </tr>
-                
-                <tr>
-                    <td style='padding-top:15px;'> <input name='res' type='reset' value='Annuler'/></td> 
-                    <td style='padding-top:15px;'><input name='ok' type='submit' value='Valider'onclick = "success()"/></td>
-                </tr>
-            </table>
-        </fieldset>
-    </form><br>
-    <button class = "accueil-publierArticle" style="margin-left: 35%;"onclick="window.location.href='../espace_commun/accueilCommun.php?accueil=1';">Revenir à l'accueil</button>
-    <button class = "ListeArticle-button" style="margin-left:50px;"onclick="window.location.href='articles.php';" title='Voir tous les articles'>Tous les articles</button>
-    
+                    </tr>
+                    <tr>
+                        <td style="color:red;"> Prix TTC = (Prix HT vente) x (1 + Taux TVA )</td>
+                    </tr>
+
+                    <tr>
+                        <td> Poids de l'article (en g): </td>
+                        <td> <input type="float" name = "poids" placeholder="poids en gramme"> </td>
+                    </tr>
+                    <tr>
+                        <td> Couleur: </td>
+                        <td> <input type="text" name = "couleur"placeholder="Noir, Bleu"> </td>
+                    </tr>
+                    <tr>
+                        <td> Détails du produit : </td>
+                        <td> <textarea name = "description"></textarea> </td>
+                    </tr>
+
+                    <tr>
+                    <td style='padding-top:15px;padding-bottom:5px;'><p> Veuillez télécharger une image et la nommer convenablement au préalable </p></td>
+                        <td style='padding-top:15px;'> </td>
+                    </tr>
+                    <tr>
+                        <td> Image de l'article : </td>
+                        <td> <input type="file" name="img" /> </td>
+                        <td>  </td>
+                    </tr>
+
+                    <tr>
+                        <td style='padding-top:15px;'> <input name='res' type='reset' value='Annuler'/></td>
+                        <td style='padding-top:15px;'><input name='ok' type='submit' value='Valider'onclick = "success()"/></td>
+                    </tr>
+
+
+                </table>
+            </fieldset>
+        </form><br>
+        <div class="boutonArticle">
+            <button class = "accueil-publierArticle" onclick="window.location.href='../espace_commun/accueilCommun.php?accueil=1';">Revenir à l'accueil</button>
+
+        </div>
+    </div>
     <script src="script.js"></script>
+    <?php include("../src/boutiqueFooter.php"); ?>
 </body>
 </html>

@@ -31,6 +31,7 @@ if(isset($_SESSION["user"])){
                             'item_poids'  =>  $_POST["hidden_poids"]
                         );
                         $_SESSION["shopping_cart"][$count] = $item_array;
+                        echo '<script>alert("Article ajouté")</script>';
                     }
                     else
                     {
@@ -52,12 +53,12 @@ if(isset($_SESSION["user"])){
                 }
             }
             else {
-
+                echo '<script>alert(" Pas assez de quantité disponible ")</script>';
             }
         }
 
         else {
-            
+            echo '<script>alert("Remplissez la taille")</script>';
         }
     }
 
@@ -270,11 +271,7 @@ if(isset($_GET['reference']) AND !empty($_GET['reference'])){
                     </div>
                 </div>
             </form>
-                <script type="text/javascript">
-                function AjoutArticle() {
-                    alert("Article ajouté");
-                }
-                </script>
+
                 <!--
                 <div class="sliderRight"><i class="fa-solid fa-angle-right"></i></div>
                 <div class="sliderLeft"><i class="fa-solid fa-angle-left"></i></div>

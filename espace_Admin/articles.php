@@ -29,7 +29,6 @@
     <link rel="stylesheet" type="text/css" href="../design/accueil.css">
 
     <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400&display=swap" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="../design/accueil.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
@@ -133,7 +132,6 @@
                         <th scope="col">Sous-categorie</th>
                         <th scope="col">Description</th>
                         <th scope="col">Couleur</th>
-                        <th scope="col">Couleur</th>
                         <th scope="col">Prix d'achat HT</th>
                         <th scope="col">Prix de vente HT</th>
                         <th scope="col">Prix TTC</th>
@@ -153,7 +151,6 @@
                         <td><?= $article['categorie']; ?></td>
                         <td><?= $article['sous_categorie']; ?></td>
                         <td><?= $article['description']; ?></td>
-                        <td><?= $article['couleur']; ?></td>
                         <td><?= $article['couleur']; ?></td>
                         <td><?= $article['prix_achat_HT']; ?></td>
                         <td><?= $article['prix_vente_HT']; ?></td>

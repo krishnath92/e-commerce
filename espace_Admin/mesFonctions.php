@@ -1,7 +1,7 @@
 <?php
 function logoAdmin(){
 	echo"<link rel='stylesheet' href='stylesheet.css' />
-		<div style='width: 100%; height: 10px; background-color: #000000;'>
+		<div style='width: 100%; height: 10px;'>
 		    <div id='brand'>
 		       	<a href= '../espace_commun/accueilCommun.php?accueil=1' ><img src='../img/logo.png' alt='LOGO' title='Accueil' /></a>
 		    </div>

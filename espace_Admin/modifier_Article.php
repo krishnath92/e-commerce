@@ -1,10 +1,12 @@
 <?php
 session_start();
 require('../src/connect.php');
+require_once('mesFonctions.php');
+logoAdmin();
 
 if(isset($_GET['reference']) AND !empty($_GET['reference'])){
     $getRef= $_GET['reference'];
-    
+
     $recupArticle = $db->prepare('SELECT *from products where reference = ?');
     $recupArticle->execute(array($getRef));
 
@@ -12,7 +14,7 @@ if(isset($_GET['reference']) AND !empty($_GET['reference'])){
         //On récupère les champs de l'article choisi précedemment dans le tableau d'articles
         $article_Infos = $recupArticle->fetch();
         //Chaque champs est ramené avec la variable $article_Infos
-        //On stocke ensuite 1 champ pour une variable 
+        //On stocke ensuite 1 champ pour une variable
         $marque_Vêtement = $article_Infos['marque'];
         $nbr_Vêtement = $article_Infos['nombre_stock'];
         $categorie_Vêtement = $article_Infos['categorie'];
@@ -41,7 +43,7 @@ if(isset($_GET['reference']) AND !empty($_GET['reference'])){
             $couleur_saisi = $_POST['couleur'];
             $description_saisi = $_POST['description'];
 
-            
+
             if(!empty($marque_saisi) ){
                 $updateMarque = $db->prepare('UPDATE products SET marque = ? WHERE reference = ?');
                 $updateMarque->execute(array($marque_saisi, $getRef));
@@ -53,7 +55,7 @@ if(isset($_GET['reference']) AND !empty($_GET['reference'])){
             elseif (!empty($categorie_saisi) ) {
                 $updateCategorie = $db->prepare('UPDATE products SET categorie = ? WHERE reference = ?');
                 $updateCategorie->execute(array($categorie_saisi, $getRef));
-            } 
+            }
             elseif (!empty($sousCat_saisi) ) {
                 $updateSousCat = $db->prepare('UPDATE products SET sous_categorie = ? WHERE reference = ?');
                 $updateSousCat->execute(array($sousCat_saisi, $getRef));
@@ -88,7 +90,7 @@ if(isset($_GET['reference']) AND !empty($_GET['reference'])){
             }
 
             elseif (isset($_FILES['img']) AND $_FILES['img']['error'] == 0 ) {
-                
+
                 if ($_FILES['img']['size'] <= 1000000) {
                     // Testons si l'extension est autorisée
                     $infosfichier = pathinfo($_FILES['img']['name']);
@@ -107,12 +109,12 @@ if(isset($_GET['reference']) AND !empty($_GET['reference'])){
                 $updateImage = $db->prepare('UPDATE products SET image = ? WHERE reference = ?');
                 $updateImage->execute(array($nom_Image, $getRef));
             }
-           
+
             header('location: articles2.php?Article-modifié-avec-succès');
-            
+
         }
-        
-        
+
+
     }else{
         echo "Aucun article n'a été trouvé";
     }
@@ -128,155 +130,100 @@ if(isset($_GET['reference']) AND !empty($_GET['reference'])){
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style/stylesheet.css" >
+    <link rel="stylesheet" type="text/css" href="../design/footerFormulaires.css">
+    <link rel="stylesheet" type="text/css" href="../design/articleFormulaires.css">
+
     <link rel="icon" type="image/png" href="../img/favicon.png">
     <title>Modifier l'article</title>
 </head>
 <body>
-    <!-- Formulaire d'affichage des valeurs de l'article sélectionné-->
-    <form method="POST" action="" enctype="multipart/form-data">
-        <fieldset> 
-            <legend style="font-weight:bold; font-size:1.3em;">Voici les valeurs de l'article sélectionné</legend>
-            <table style="text-align: initial;">
+<?php if(isset($_GET['error'])){
+
+    if(isset($_GET['message'])) {
+        echo'<div class="alert error">'.htmlspecialchars($_GET['message']).'</div>';
+    }
+
+}
+?>
+
+
+    <div id="login-body">
+        <!-- Formulaire de modification des valeurs de l'article sélectionné-->
+        <form method="POST" action="" enctype="multipart/form-data">
+            <legend style="font-weight:bold; font-size:1.3em;">Modifier un article</legend>
+            <fieldset>
+                <table class="table-publier">
                     <tr>
-                        <td> Marque :</a> </td> 
-                        <td> <?= $marque_Vêtement?> </td>
+                        <td> Marque : </td>
+                        <td> <input type="text" name = "marque" placeholder=<?= $marque_Vêtement?> autofocus> </td>
                     </tr>
                     <tr>
-                        <td> Réference : </td> 
-                        <td> <?= $getRef?> </td>
+                        <td> Réference : </td>
+                        <td><b style="color:red;"> <?=$getRef?>  (cette valeur est inchangeable) </b></td>
                     </tr>
                     <tr>
-                        <td> Nombre d'articles en stock : </td> 
-                        <td> <?= $nbr_Vêtement?> </td>
+                        <td> Catégorie : </td>
+                        <td> <input type="text" name = "categorie" placeholder= <?= $categorie_Vêtement?> </td>
                     </tr>
                     <tr>
-                        <td> Catégorie : </td> 
-                        <td> <?= $categorie_Vêtement?> </td>
+                        <td> Sous-catégorie : </td>
+                        <td> <input type="text" name = "sousCat" placeholder=<?= $sousCat_Vêtement?> </td>
                     </tr>
                     <tr>
-                        <td> Sous-catégorie : </td> 
-                        <td> <?= $sousCat_Vêtement?> </td>
+                        <td> Le prix de vente (hors taxe) : </td>
+                        <td> <input type="float" name = "prix_vente" placeholder=<?= $prixVente_Vêtement?> </td>
                     </tr>
                     <tr>
-                        <td> Le prix d'achat HT : </td> 
-                        <td> <?= $prixAchat_Vêtement?> </td>
+                        <td> Taux TVA (en %) : </td>
+                        <td> <input type="float" name = "TVA" placeholder=<?= $tauxTVA?> </td>
+                    </tr>
+
+                    <tr>
+                        <td> Le prix de l'article (TTC en €) : </td>
+                        <td> <input type="float" name = "priceTTC" placeholder=<?= $prixTTC_Vêtement?>> </td>
+
                     </tr>
                     <tr>
-                        <td> Le prix de vente HT : </td> 
-                        <td> <?= $prixVente_Vêtement?> </td>
+                        <td style="color:red;"> Prix TTC = (Prix HT vente) x (1 + Taux TVA )</td>
+                    </tr>
+
+                    <tr>
+                        <td> La remise appliquée (en %) : </td>
+                        <td> <input type="number" name= "remiseVêtement" placeholder=<?= $remise_Vêtement?> </td>
                     </tr>
                     <tr>
-                        <td> Taux TVA (en %) : </td> 
-                        <td> <?= $tauxTVA?> </td>
+                        <td> Poids de l'article : </td>
+                        <td> <input type="float" name = "poids" placeholder=<?= $poids_Vêtement?> </td>
                     </tr>
                     <tr>
-                        <td> Le prix TTC : </td> 
-                        <td> <?= $prixTTC_Vêtement?> </td>
+                        <td> Couleur : </td>
+                        <td> <input type="text" name = "couleur"placeholder=<?= $couleur_Vêtement?> </td>
                     </tr>
                     <tr>
-                        <td> La remise appliquée (en %) : </td> 
-                        <td> <?= $remise_Vêtement?> </td>
+                        <td> Détails du produit : </td>
+                        <td> <textarea name = "description"> <?= $description_Vêtement?> </textarea> </td>
                     </tr>
                     <tr>
-                        <td> Poids de l'article (en g) : </td> 
-                        <td> <?= $poids_Vêtement?> </td>
+                        <td style='padding-top:15px;'> </td>
+                        <td style='padding-top:15px;padding-bottom:5px;'><p> Veuillez télécharger une image et la nommer convenablement au préalable </p></td>
                     </tr>
                     <tr>
-                        <td> Couleur : </td> 
-                        <td> <?= $couleur_Vêtement?> </td>
+                        <td> Image de l'article : </td>
+                        <td> <input type="file" name="img" /> </td>
+                        <td>  </td>
                     </tr>
                     <tr>
-                        <td> Détails du produit : </td> 
-                        <td> <?= $description_Vêtement?> </td>
+                        <td> <input style="margin-top:30px;" name='res' type='reset' value='Annuler'/></td>
+                        <td><input style="margin-top:30px;" name='ok' type='submit' value='Valider'onclick = "successModif()"/></td>
                     </tr>
-                    <tr>
-                        <td> Image actuelle : </td> 
-                        <td> <?= $image_Vêtement?> </td>
-                    </tr>
-                    
                 </table>
-        </fieldset>
-    </form> <br><br>
-
-    <!-- Formulaire de modification des valeurs de l'article sélectionné-->
-    <form method="POST" action="" enctype="multipart/form-data">
-        <fieldset> <legend style="font-weight:bold; font-size:1.3em;">Modifier les valeurs de cet article</legend>
-            <table style="text-align: initial;">
-                <tr>
-                    <td> Marque : </td> 
-                    <td> <input type="text" name = "marque" placeholder="ex: Nike, Addidas" autofocus> </td>
-                </tr>
-                <tr>
-                    <td> Réference : </td> 
-                    <td><b style="color:red;"> Cette valeur est inchangeable </b></td>
-                </tr>
-                <tr>
-                    <td> Nombre d'articles en stock : </td> 
-                    <td> <input type="number" name = "stock" placeholder="donner un nombre"> </td>
-                </tr>
-                <tr>
-                    <td> Catégorie : </td> 
-                    <td> <input type="text" name = "categorie" placeholder="Homme ou Femme"> </td>
-                </tr>
-                <tr>
-                    <td> Sous-catégorie : </td> 
-                    <td> <input type="text" name = "sousCat" placeholder="Jogging, brassière, short"> </td>
-                </tr>
-                <tr>
-                    <td> Le prix de vente (hors taxe) : </td> 
-                    <td> <input type="float" name = "prix_vente" placeholder="ex: 37.50"> </td>
-                </tr>
-                <tr>
-                    <td> Taux TVA (en %) : </td> 
-                    <td> <input type="float" name = "TVA" placeholder="ex: 20"> </td>
-                </tr>
-
-                <tr>
-                    <td> Le prix de l'article (TTC en €) : </td> 
-                    <td> <input type="float" name = "priceTTC" placeholder="ex: 50.75"> </td>
-                    
-                </tr>
-                <tr>
-                    <td style="color:red;"> Prix TTC = (Prix HT vente) x (1 + Taux TVA )</td>                     
-                </tr>
-
-                <tr>
-                    <td> La remise appliquée (en %) : </td>
-                    <td> <input type="number" name= "remiseVêtement" placeholder="ex: 10"> </td>
-                </tr>
-                <tr>
-                    <td> Poids de l'article : </td> 
-                    <td> <input type="float" name = "poids" placeholder="poids en gramme"> </td>
-                </tr>
-                <tr>
-                    <td> Couleur : </td> 
-                    <td> <input type="text" name = "couleur"placeholder="Noir, Bleu"> </td>
-                </tr>
-                <tr>
-                    <td> Détails du produit : </td> 
-                    <td> <textarea name = "description"></textarea> </td>
-                </tr>
-                <tr>
-                    <td style='padding-top:15px;'> </td>
-                    <td style='padding-top:15px;padding-bottom:5px;'><p> Veuillez télécharger une image et la nommer convenablement au préalable </p></td>
-                </tr>
-                <tr>
-                    <td> Image de l'article : </td> 
-                    <td> <input type="file" name="img" /> </td>
-                    <td>  </td>
-                </tr>               
-                <tr>
-                    <td> <input style="margin-top:30px;" name='res' type='reset' value='Annuler'/></td> 
-                    <td><input style="margin-top:30px;" name='ok' type='submit' value='Valider'onclick = "successModif()"/></td>
-                </tr>
-            </table>
-        </fieldset>
-    </form>
-    <br>
-    <button onclick="window.location.href='articles.php';">Retour sur la liste des articles</button>
-    <button style="margin-left:10px;" onclick="window.location.href='../espace_commun/accueilCommun.php?accueil=1';">Revenir à l'accueil</button>
-
+            </fieldset>
+        </form>
+        <br>
+        <button onclick="window.location.href='articles.php';">Retour sur la liste des articles</button>
+        <button style="margin-left:10px;" onclick="window.location.href='../espace_commun/accueilCommun.php?accueil=1';">Revenir à l'accueil</button>
+    </div>
     <script src="script.js"></script>
+    <?php include("../src/boutiqueFooter.php"); ?>
 </body>
 </html>

@@ -2,7 +2,9 @@ html {
 	background: white;
 }
 
-
+* {
+	font-family: "Source Sans Pro", "Helvetica Neue", Arial, sans-serif;
+}
 body {
 	/*min-height: 100%;
 	size: 120%;*/
@@ -317,6 +319,7 @@ legend{
 	
 	
 }
+
 
   /*  ----------------- products.PHP  ------------------------- */
 

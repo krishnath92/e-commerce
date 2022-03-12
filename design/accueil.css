@@ -125,7 +125,7 @@ h4{
 .text-presentation {
     color: #273849;
     font-size: 3em;
-    margin-left: 16%;
+    margin-left: 20%;
     margin-right: 15%;
     font-weight: 300;
 		
@@ -135,7 +135,7 @@ h4{
 .text-presentation-user {
     color: #273849;
     font-size: 3em;
-    margin-left: 15%;
+    margin-left: 20%;
     margin-right: 8%;
     font-weight: 300;
 		
@@ -146,7 +146,7 @@ h4{
     font-size: 3.2em;
 
     font-weight: 300;
-    margin-left: 7%;
+    margin-left: 14%;
     margin-right: 2%;
 		
 }
@@ -239,7 +239,7 @@ h4{
     z-index: 0;
     border-radius: 10px;
     margin-top: 14px;
-    margin-left: 2%;
+    margin-left: 5%;
     margin-right: 2%;
 }
 
@@ -470,6 +470,9 @@ nav li:hover .submenu{
 
 
 /*  ----------------- AFFICHAGE ARTICLE ET INFORMATION CATAGORIE ------------------------- */
+
+
+
 #projets{
 	display: flex;
 	flex-wrap: wrap;
