@@ -22,6 +22,7 @@ require('../src/connect.php');
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="../design/accueil.css">
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
     <title>Accueil </title>
 </head>
@@ -203,7 +204,67 @@ require('../src/connect.php');
             
         </section>
     </div>
-    
+
+    <!-- about -->
+    <div id="about" class="about">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="titlepage">
+                        <h2>A propos de MATEK</h2>
+                        <span>MATEK est un site e-commerce réalisé par des étudiants en DUT informatique pour leur projet tuteuré. </span><br>
+                        <span id="text-membre"> MATEK reprend les initiales des cinqs étudiants ayant participé à ce projet : Mathias, Antoine, Tom, Elies et Krishnath.</span>
+                              M : Mathias
+                              A : Antoine
+                              T : Tom
+                              E : Elies
+                              K : Krishnath
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!-- about -->
+
+    <!-- best -->
+    <div id="" class="best">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="titlepage">
+                        <h2>Pourquoi MATEK ? </h2>
+                        <span>Notre site e-commerce propose ses services afin de satisfaire les besoins de nos clients. </span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="best_box">
+                        <h4>100% <br>Sécurisé</h4>
+                        <p>Notre site est sécurisé et permet aux internautes d'y naviguer, s'inscrire et payer sans crainte.<br><br> </p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="best_box">
+                        <h4>100% <br> Diversité </h4>
+                        <p>Nous sommes spécialistes dans notre activité de vente de produit, et vous proposons une large gamme de produits, répondant à vos attentes. </p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="best_box">
+                        <h4>100% <br> Haute qualité </h4>
+                        <p>Notre site propose des vêtements de haute qualité venant de grandes marques telles que Nike, Adidas ou encore North Face. </p>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <a class="read_more" href="accueilCommun.php?homme=1">Voir les produits</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end best -->
+
     <!-- Bouton RETOUR EN HAUT DE PAGE -->
     <div id="scroll_to_top">
         <a href="#top"><img src="../img/to_top.png" title="Retourner en haut" /></a>
