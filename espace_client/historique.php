@@ -49,6 +49,6 @@ $factures = $requser2->fetchAll();
                     </tr>
                     <?php } ?>
                 </table>
-				<button id="boutonHistorique" style="width: 5%; padding: 5px; font-size: 0.85em" onclick="window.location.href='../espace_commun/accueilCommun.php?accueil=1';">Revenir à l'accueil</button>
+				<button id="boutonHistorique" style="width: 5%; padding: 5px; font-weight:bold; font-size: 0.85em" onclick="window.location.href='../espace_commun/accueilCommun.php?accueil=1';">Revenir à l'accueil</button>
     </body>
 </html>

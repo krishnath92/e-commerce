@@ -63,9 +63,8 @@ require('../src/connect.php');
             <?php } ?>
         </div>
         <!-- MENU CENTRALE-->
-        <nav >
+        <nav id="navigation">
             <ul>
-                <div class="menucontent">
                     <li><a class ="menu" href="accueilCommun.php?accueil=1" title="Aller à l'accueil">ACCUEIL</a></li>
 
                     <li> <a class = "menu" href="accueilCommun.php?homme=1" title="Homme">HOMME</a>
@@ -90,11 +89,9 @@ require('../src/connect.php');
                             <li><a href = "accueilCommun.php?categoriefemme=8&femme=1">blouson</a></li>                        
                         </ul>
                     </li>
-                    <li> <a class = "menu" href="accueilCommun.php?remise=1" title="remise">REMISE</a></li>
-                </div>
+                    <li> <a class = "menu" href="accueilCommun.php?remise=1" title="remise">REMISE</a></li
             </ul>
         </nav>
-
     </header>
 
     <!-- MENU RECHERCHE-->
@@ -110,7 +107,7 @@ require('../src/connect.php');
         <div class="searchcontent">
             <label id = "label-search" for="marque">Marque:</label>
             <select name="marque" id="marque">
-                <option  selected disabled hidden>Choose here</option>
+                <option  selected disabled hidden>Choisir</option>
                 <option value="adidas"> adidas</option>
                 <option value="nike">nike</option>
                 <option value="The North Face"> The North Face </option>
@@ -118,7 +115,7 @@ require('../src/connect.php');
 
             <label id = "label-search" for="couleur">Couleur:</label>
             <select name="couleur" id="couleur">
-                <option  selected disabled hidden>Choose here</option>
+                <option  selected disabled hidden>Choisir</option>
                     <?php 
                         while($article = $rescouleur->fetch())
                         {
@@ -129,7 +126,7 @@ require('../src/connect.php');
 
             <label id = "label-search" for="prix">Prix:</label>
             <select name="prix" id="prix">
-                <option  selected disabled hidden>Choose here</option>
+                <option  selected disabled hidden>Choisir</option>
                 <option value="0">0 à 50</option>
                 <option value="50">50 à 100</option>
                 <option value="100">100 à 150</option>
@@ -137,7 +134,7 @@ require('../src/connect.php');
                 <option value="200"> &gt; 200  </option>
             </select>
 
-            <input id ="search-button" type="submit" value="Search">
+            <input id ="search-button" type="submit" value="Rechercher">
         </div>
     </form>
     <?php } ?>
@@ -182,27 +179,28 @@ require('../src/connect.php');
 
         <?php
     if(isset($_GET['accueil'])&&isset($_SESSION["admin"])){ ?>
+        <div class="actionadmin">
+            <h3 style="text-align:center;" >Quelle action souhaitez-vous réaliser ?</h3>
+            <!--a href="membres.php">afficher tous les membres</a><br-->
+            <button class = "boutonAdmin" style="margin:40px ;"  onclick="window.location.href='../espace_Admin/membres.php';">Afficher tous les membres</button>
 
-        <h3 style="text-align:center;" >Quelle action souhaitez-vous réaliser ?</h3>
-        <!--a href="membres.php">afficher tous les membres</a><br-->
-        <button class = "boutonAdmin" style="margin:40px ;"  onclick="window.location.href='../espace_Admin/membres.php';">Afficher tous les membres</button>
+            <!--a href="publier_Article.php">Publier un article</a><br-->
+            <button class = "boutonAdmin" style="margin:40px ;" onclick="window.location.href='../espace_Admin/publier_Article.php';">Mettre en vente un article</button>
 
-        <!--a href="publier_Article.php">Publier un article</a><br-->
-        <button class = "boutonAdmin" style="margin:40px ;" onclick="window.location.href='../espace_Admin/publier_Article.php';">Mettre en vente un article</button>
-        
-        <!--a href="articles.php">afficher tous les article</a><br-->
-        <button class = "boutonAdmin" style="margin:40px ;" onclick="window.location.href='../espace_Admin/articles.php';">Afficher tous les article</button>
-        <?php } ?>
+            <!--a href="articles.php">afficher tous les article</a><br-->
+            <button class = "boutonAdmin" style="margin:40px ;" onclick="window.location.href='../espace_Admin/articles.php';">Afficher tous les article</button>
+            <?php } ?>
 
-        <!-- Les Vêtements -->
-        <section>
-            <!-- INCLUDE -->
-            <?php include("rechercheMenu.php"); ?>
+            <!-- Les Vêtements -->
+            <section>
+                <!-- INCLUDE -->
+                <?php include("rechercheMenu.php"); ?>
 
-            <!-- INCLUDE -->
-            <?php include("remise.php"); ?>
-            
-        </section>
+                <!-- INCLUDE -->
+                <?php include("remise.php"); ?>
+
+            </section>
+        </div>
     </div>
 
     <!-- about -->

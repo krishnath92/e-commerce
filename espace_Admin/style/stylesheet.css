@@ -173,16 +173,20 @@ body {
 	
 	
 }
-
+.mr-5 {
+	margin-right: 5%!important;
+}
 .head-client{
 	display: flex !important;
 	justify-content: center;
 	margin-bottom: 2%;
 }
 
-.text-client-inscrit{
+.text-client-inscrit {
 	margin-left: 25%;
-	margin-right: 15%;
+	margin-right: 6%;
+	font-size: 50px;
+	font-weight: bold;
 }
 
 #bouton-reset-client{
@@ -348,9 +352,11 @@ legend{
 	border-radius: 10px;
 }
 
-.text-article{
+.text-article {
 	margin-left: 30%;
-	margin-right: 15%;
+	margin-right: 10%;
+	font-size: 50px;
+	font-weight: bold;
 }
 
   .table-products{

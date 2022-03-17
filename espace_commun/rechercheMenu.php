@@ -203,10 +203,10 @@ if (isset($_GET['homme'])||isset($_GET['femme'])){
 
 
     if (isset($sous_categorie)){
-        echo " <h3 id='searchcategorie' style='padding-bottom: 40px; padding-top: 40px;'>Vetement / ".$sexe." / ".$sous_categorie." (".$nbrsouscategorie.")</h3>";
+        echo " <h3 id='searchcategorie' >Vetement / ".$sexe." / ".$sous_categorie." (".$nbrsouscategorie.")</h3>";
     }
     else {
-        echo "<h3 id='searchcategorie' style='padding-bottom: 40px; padding-top: 40px;'>Vetement / ".$sexe." (".$nbrcategorie.")</h3>";
+        echo "<h3 id='searchcategorie'>Vetement / ".$sexe." (".$nbrcategorie.")</h3>";
     }
 
 
