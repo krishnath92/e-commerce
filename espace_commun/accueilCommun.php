@@ -26,6 +26,7 @@ require('../src/connect.php');
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
     <title>Accueil </title>
 </head>
+
 <body id = "accueil-body" >
     <header>
         <div id="brand">
@@ -40,15 +41,15 @@ require('../src/connect.php');
             <?php if(isset($_SESSION["user"])){ ?> <h1 class= "h1 text-presentation-user" >Bienvenue sur Stunning Outfit Shop !</h1> <?php } ?>
             <?php if(isset($_SESSION["admin"])){ ?> <h1 class= "h1 text-presentation-admin" >Bienvenue sur  l'espace admin  de Stunning Outfit Shop !</h1> <?php } ?>
 
-        <?php if(isset($_SESSION["user"])){ ?>
+            <?php if(isset($_SESSION["user"])){ ?>
             <li class="dropdown">
                 <a class="bi bi-person-circle" style="font-size: 2rem; color: black;"><?php echo $_SESSION['prenom']; ?></a>
 
-                <div class="dropdown-content">          
+                <div class="dropdown-content">
                     <a style='color:white;' href="../espace_client/logout.php">Se déconnecter</a>
                     <a style='color:white;' href="../espace_client/profil.php">Consulter son profil</a>
                     <a style='color:white;' href="../espace_client/historique.php">Consulter ses commandes</a>
-                
+
                 </div>
             </li>
             <button class="glow-on-hover" onclick="window.location.href='../espace_client/panier.php';">Mon panier</button>
@@ -65,31 +66,31 @@ require('../src/connect.php');
         <!-- MENU CENTRALE-->
         <nav id="navigation">
             <ul>
-                    <li><a class ="menu" href="accueilCommun.php?accueil=1" title="Aller à l'accueil">ACCUEIL</a></li>
+                <li><a class ="menu" href="accueilCommun.php?accueil=1" title="Aller à l'accueil">ACCUEIL</a></li>
 
-                    <li> <a class = "menu" href="accueilCommun.php?homme=1" title="Homme">HOMME</a>
-                        <ul class="submenu">
-                            <li><a href = "accueilCommun.php?categoriehomme=1&homme=1">joggings</a></li>
-                            <li><a href = "accueilCommun.php?categoriehomme=2&homme=1">shorts</a></li>
-                            <li><a href = "accueilCommun.php?categoriehomme=3&homme=1">Sweat</a></li>
-                            <li><a href = "accueilCommun.php?categoriehomme=4&homme=1">Polo</a></li>
-                            <li><a href = "accueilCommun.php?categoriehomme=5&homme=1">T-shirt</a></li>
-                            <li><a href = "accueilCommun.php?categoriehomme=6&homme=1">blouson</a></li>
-                        </ul>
-                    </li>
-                    <li> <a class = "menu" href="accueilCommun.php?femme=1" title="Femme">FEMME</a>
-                        <ul class="submenu">
-                            <li><a href = "accueilCommun.php?categoriefemme=1&femme=1">leggings</a></li>
-                            <li><a href = "accueilCommun.php?categoriefemme=2&femme=1">joggings</a></li>
-                            <li><a href = "accueilCommun.php?categoriefemme=3&femme=1">cycliste</a></li>
-                            <li><a href = "accueilCommun.php?categoriefemme=4&femme=1">Sweat</a></li>
-                            <li><a href = "accueilCommun.php?categoriefemme=5&femme=1">crop-top</a></li>
-                            <li><a href = "accueilCommun.php?categoriefemme=6&femme=1">brassière</a></li>
-                            <li><a href = "accueilCommun.php?categoriefemme=7&femme=1">T-shirt</a></li>
-                            <li><a href = "accueilCommun.php?categoriefemme=8&femme=1">blouson</a></li>                        
-                        </ul>
-                    </li>
-                    <li> <a class = "menu" href="accueilCommun.php?remise=1" title="remise">REMISE</a></li
+                <li> <a class = "menu" href="accueilCommun.php?homme=1" title="Homme">HOMME</a>
+                    <ul class="submenu">
+                        <li><a href = "accueilCommun.php?categoriehomme=1&homme=1">joggings</a></li>
+                        <li><a href = "accueilCommun.php?categoriehomme=2&homme=1">shorts</a></li>
+                        <li><a href = "accueilCommun.php?categoriehomme=3&homme=1">Sweat</a></li>
+                        <li><a href = "accueilCommun.php?categoriehomme=4&homme=1">Polo</a></li>
+                        <li><a href = "accueilCommun.php?categoriehomme=5&homme=1">T-shirt</a></li>
+                        <li><a href = "accueilCommun.php?categoriehomme=6&homme=1">blouson</a></li>
+                    </ul>
+                </li>
+                <li> <a class = "menu" href="accueilCommun.php?femme=1" title="Femme">FEMME</a>
+                    <ul class="submenu">
+                        <li><a href = "accueilCommun.php?categoriefemme=1&femme=1">leggings</a></li>
+                        <li><a href = "accueilCommun.php?categoriefemme=2&femme=1">joggings</a></li>
+                        <li><a href = "accueilCommun.php?categoriefemme=3&femme=1">cycliste</a></li>
+                        <li><a href = "accueilCommun.php?categoriefemme=4&femme=1">Sweat</a></li>
+                        <li><a href = "accueilCommun.php?categoriefemme=5&femme=1">crop-top</a></li>
+                        <li><a href = "accueilCommun.php?categoriefemme=6&femme=1">brassière</a></li>
+                        <li><a href = "accueilCommun.php?categoriefemme=7&femme=1">T-shirt</a></li>
+                        <li><a href = "accueilCommun.php?categoriefemme=8&femme=1">blouson</a></li>
+                    </ul>
+                </li>
+                <li> <a class = "menu" href="accueilCommun.php?remise=1" title="remise">REMISE</a></li
             </ul>
         </nav>
     </header>
@@ -203,6 +204,8 @@ require('../src/connect.php');
         </div>
     </div>
 
+    <?php
+    if(isset($_GET['accueil'])&& $_GET['accueil'] == 1){ ?>
     <!-- about -->
     <div id="about" class="about">
         <div class="container">
@@ -262,7 +265,7 @@ require('../src/connect.php');
         </div>
     </div>
     <!-- end best -->
-
+    <?php } ?>
     <!-- Bouton RETOUR EN HAUT DE PAGE -->
     <div id="scroll_to_top">
         <a href="#top"><img src="../img/to_top.png" title="Retourner en haut" /></a>

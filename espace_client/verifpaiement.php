@@ -1,7 +1,6 @@
 <?php
+/* FORMULAIRE D'INSCRIPTION */
 session_start();
-
-require('../src/log.php');
 
 
 if(isset($_POST["ok"])){
@@ -10,34 +9,17 @@ if(isset($_POST["ok"])){
 
     if ($_SESSION["cle"] == $_POST['cle']){
 
-        foreach($_SESSION["info"] as $keys => $values)
-        require('../src/connect.php');
-        {
-            $req = $db->prepare("INSERT INTO membres(id_client,email, password, secret, adresse, adresse_livraison, date_naissance, prenom, nom, pays, code_postal, ville, tél, civilité) VALUES(?,?,?,?, ?,?,?, ?,?,?, ?,?,?,?)");
-	        $req->execute(array($_SESSION["info"][0]["idclient"],$_SESSION["info"][0]["email"], $_SESSION["info"][0]["password"], $_SESSION["info"][0]["secret"], $_SESSION["info"][0]["adresse1"], $_SESSION["info"][0]["adresseLivraison"], $_SESSION["info"][0]["birthDate"], $_SESSION["info"][0]["prenom"], $_SESSION["info"][0]["nom"], $_SESSION["info"][0]["pays"], $_SESSION["info"][0]["codePostal"], $_SESSION["info"][0]["ville"], $_SESSION["info"][0]["numero"], $_SESSION["info"][0]["civilite"]));
-
-        }
-
         unset($_SESSION["info"]);
         unset($_SESSION["cle"]);
-        header('location: inscription.php?success=1');
-	    exit();
-
-
+        header('location: commande.php');
+        exit();
     }
 
     else {
-        header('location: verif.php?error=1&message=La clé est fausse.');
+        header('location: verifpaiement.php?error=1&message=La clé est fausse.');
     }
 
 }
-
-
-
-    
-
-
-
 ?>
 
 <!DOCTYPE html>
@@ -57,12 +39,12 @@ if(isset($_POST["ok"])){
          	<a href= "accueilCommun.php?accueil=1" ><img src="../img/logo.png" alt="LOGO" /></a>
       	</div>
    	</header>
-	
+
 	<section>
 		<div id="login-body">
 			<h1>Verification</h1>
 
-            
+
 			<?php if(isset($_GET['error'])){
 
 				if(isset($_GET['message'])) {
@@ -73,7 +55,7 @@ if(isset($_POST["ok"])){
 
 			}  ?>
 
-			<form method="post" action="verif.php" >
+			<form method="post" action="verifpaiement.php" >
 
 
 				<!--code verif -->

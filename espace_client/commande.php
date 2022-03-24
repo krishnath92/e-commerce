@@ -27,7 +27,8 @@ if(isset($_SESSION["user"])){
 }
 
 foreach($_SESSION["shopping_cart"] as $keys => $values){
-    $ref = $values['item_id'];
+    $refId = $values['item_id'];
+    $ref = $values['item_ref'];
     $quantite = $values['item_dispo'] - $values['item_quantite'];
     
     $connexion=mysqli_connect($serveur,$login,$mdp)
@@ -39,7 +40,7 @@ foreach($_SESSION["shopping_cart"] as $keys => $values){
     $reqfacture = "INSERT INTO `factures` (`id_facture`,`num_facture`, `id_client`, `prix`, `reference`, `quantite`) VALUES (NULL, '$num_facture', '$idclient', '$total', '$ref', '$quantite');";
 
     $updateTaille = $db->prepare('UPDATE taille SET dispo = ? WHERE id_ref = ?');
-    $updateTaille->execute(array($quantite, $ref));
+    $updateTaille->execute(array($quantite, $refId));
 
     mysqli_query($connexion,$reqfacture);
 }

@@ -127,8 +127,7 @@ if(isset($_POST["ok"])){
 				$mail->Host = 'smtp.gmail.com';
 				$mail->Port = 465;  
 				$mail->Username = 'testpourprojet92@gmail.com';
-				$mail->Password = 'Krishnath92';   
-		
+                $mail->Password = 'projetiutvelizy';
 		//   $path = 'reseller.pdf';
 		//   $mail->AddAttachment($path);
 		

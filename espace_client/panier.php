@@ -79,7 +79,7 @@ if(isset($_SESSION["user"])){
 							<td align="right">$ <?php echo number_format($totalCharge, 2); echo "(" .$total. "+" .$fraisport. ")" ;?></td>
 							<td>
 								<form action="paiement.php" method="post">
-									<input type="hidden" name="name" value="<?php echo $values["item_id"]; ?>">	
+                                    <input type="hidden" name="id" value="<?php echo $values["item_id"]; ?>">
 									<input type="hidden" name="name" value="<?php echo $values["item_ref"]; ?>">
 									<input type="hidden" name="qty" value="<?php echo $values["item_quantite"]; ?>">
 									<input type="hidden" name="price" value="<?php echo $values["item_prix"]; ?>">

@@ -161,6 +161,7 @@ h3{
     border-radius: 20px;
     padding: 30px 20px;
     margin-bottom: 30px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
 }
 
 .best_box h4 {
@@ -189,15 +190,12 @@ h3{
     max-width: 190px;
     text-align: center;
     display: inline-block;
-    transition: ease-in all 0.5s;
 }
 
-
-
-
-
-
-
+.read_more:hover{
+    background-color: #333;
+    text-decoration: none;
+}
 
 /*  ----------------- SUCESS MESSAGE CONNECTION ------------------------- */
 .success {
@@ -206,7 +204,7 @@ h3{
 	margin: 0px 0;
     margin-top: 80px;
 	color: black;
-	border-radius: 5px;
+	border-radius: 8px;
 	text-align: center;	
     font-size: 25px;
 
@@ -216,7 +214,13 @@ h3{
 
 .btn-success{
     background-color : #4fc0a6 !important;
+    border-radius: 8px;
 }
+
+.btn-success:hover{
+    background-color : black !important;
+}
+
 
 h4{
     line-height: 2.5;
@@ -225,6 +229,7 @@ h4{
 /* article.php */
 #taille{
     width: 100%;
+    cursor: pointer;
 }
 
 /*  ----------------- SEARCH BAR  ------------------------- */
@@ -256,8 +261,9 @@ h4{
     background-color: white;
     color: black;
     border: none;
-
+    cursor: pointer;
 }
+
 /*  ----------------- IMAGE TURN  ------------------------- */
 .images{
 	display: flex;
@@ -406,7 +412,7 @@ h4{
 
 .glow-on-hover {
     font-weight: bold;
-    width: 150px;
+    width: 130px;
     height: 50px;
     border: none;
     outline: none;
@@ -442,7 +448,7 @@ h4{
 
 .glow-on-hover-connexion:hover {
     color : #4fc0a6;
-    font-size: 1.5rem;
+    font-size: 1.25rem;
   }
 
 @keyframes glowing {
@@ -860,7 +866,6 @@ a{
     border-radius: 10px;
     margin-right: 20%;
     margin-top: 4%;
-
 }
 .slider{
 
@@ -876,53 +881,9 @@ a{
 .slider img{
     width: 600px;
     height: 600px;
-}
-
-
-.sliderRight, .sliderLeft{
-    width: 40px;
-    height: 40px;
-    position: relative;
-}
-
-
-.sliderLeft{
-    top: calc(120% + 50px);
-    left: calc(30% - 50px); 
-    cursor: pointer;
-    border-radius: 50%;
-
-}
-
-.sliderRight{
-    top: calc(120% + 50px);
-    left: calc(50% - 40px);
-    cursor: pointer;
-    border-radius: 50%;
-
-}
-
-.miniPics{
-    width: 100%;
-    top: calc(110% + 15rem);
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    position: absolute;
-}
-
-.miniPics img{
-    height: 30px;
-    margin: 3px;
-    border: 1px solid black;
-    cursor: pointer;
-    border-radius: 1px;
-    opacity: 0.5;
-}
-
-.miniPics img:hover{
-    opacity: 1;
+    border-radius: 15px;
+    border: #333 0.025em solid;
+    box-shadow: 3px 5px 10px 2px #333;
 }
 
 .texte{
@@ -943,14 +904,9 @@ b{
 
 }
 
-
-
 h4, #text {
     font-weight: normal;
 }
-
-
-
 
 .ajout-panier{
     text-align: center;
@@ -997,7 +953,8 @@ h4, #text {
 	border: solid 1px #999;
     
 }
-@media (max-width: 1280px) {
+
+@media (max-width: 0px) {
     .slider img{
         margin-top: 21%;
         margin-bottom: 35px;
@@ -1008,34 +965,11 @@ h4, #text {
         position: absolute;
     }
 
-    .sliderRight, .sliderLeft{
-        width: 40px;
-        height: 40px;
-        position: relative;
-    }
-    
-    
-    .sliderLeft{
-        top: calc(130% + 50px);
-        left: calc(30% - 50px); 
-        cursor: pointer;
-        border-radius: 50%;
-        position: absolute;
-    }
-    
-    .sliderRight{
-        top: calc(130% + 50px);
-        left: calc(50% - 40px);
-        cursor: pointer;
-        border-radius: 50%;
-        position: absolute;
-    }
     .description {
         margin-top: 0%;
         margin-left: 9%;
     }
 }
-
 
 .box{
     border-radius: 5px;
@@ -1058,8 +992,3 @@ h4, #text {
 .img-article{
     float: left;
 }
-
-
-
-
-

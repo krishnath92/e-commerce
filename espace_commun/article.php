@@ -50,6 +50,7 @@ if(isset($_SESSION["user"])){
                         'item_poids'  =>  $_POST["hidden_poids"]
                     );
                     $_SESSION["shopping_cart"][0] = $item_array;
+                    echo '<script>alert("Article ajouté")</script>';
                 }
             }
             else {
