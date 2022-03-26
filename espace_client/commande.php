@@ -29,7 +29,7 @@ if(isset($_SESSION["user"])){
 foreach($_SESSION["shopping_cart"] as $keys => $values){
     $refId = $values['item_id'];
     $ref = $values['item_ref'];
-    $quantite = $values['item_dispo'] - $values['item_quantite'];
+    $quantite = $values['item_quantite'];
     
     $connexion=mysqli_connect($serveur,$login,$mdp)
     or die("Connexion impossible au serveur $serveur pour $login");
@@ -55,6 +55,7 @@ if((mysqli_num_rows($resultat3)!=0)){ //Si le login existe
      unset($_SESSION["shopping_cart"]);
      unset($_SESSION["total"]);
      header("Location:../espace_commun/accueilCommun.php?accueil=1");
+     echo '<script>alert("Paiement effectué")</script>';
 }
 
 ?>

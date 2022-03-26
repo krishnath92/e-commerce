@@ -48,7 +48,7 @@ require('../src/connect.php');
                 <div class="dropdown-content">
                     <a style='color:white;' href="../espace_client/logout.php">Se déconnecter</a>
                     <a style='color:white;' href="../espace_client/profil.php">Consulter son profil</a>
-                    <a style='color:white;' href="../espace_client/historique.php">Consulter ses commandes</a>
+                    <a style='color:white;' href="../espace_client/historique.php">Consulter ses factures</a>
 
                 </div>
             </li>

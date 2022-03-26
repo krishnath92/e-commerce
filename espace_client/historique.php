@@ -27,7 +27,7 @@ $factures = $requser2->fetchAll();
 		</header>
 			<div style="clear:both"></div>
 			<br />
-			<h1>Historique de commandes</h1>
+			<h1>Historique des factures </h1>
 			<div class="table-responsive">
 				<table class="table table-bordered">
 					<tr>

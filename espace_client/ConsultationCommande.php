@@ -41,7 +41,7 @@ $prixtotal = 0;
         <title>PDF</title>
     </head>
     <body>
-        <h1>RECAPITULATIF DE LA COMMANDE : <?= $num_facture?></h1>
+        <h1>RECAPITULATIF DE LA FACTURE : <?= $num_facture?></h1>
         <p><?= $civil ?> <?= $nom?>, nous vous remercions pour votre commande et espérons que vous serez satisfait de votre livraison.</p><br>
         <p>Vous trouverez ci-dessous les informations essentielles de votre commande. </p><br>
 
