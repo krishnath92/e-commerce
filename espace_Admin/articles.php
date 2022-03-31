@@ -210,6 +210,11 @@
             </ul>
         </nav>
     </div>
+    <div>
+        <button class="boutonAdmin" style="margin-left: 5%;margin-top: 2%;"onclick="window.location.href='publier_Article.php';"> 
+            Créer une référence d'article
+        </button>
+    </div>
     <!-- CONTACT -->
     <section >
         <?php require("../src/boutiqueFooter.php"); ?>
